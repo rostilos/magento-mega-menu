@@ -1,0 +1,29 @@
+<?php
+?>
+<!-- Some general js functions-->
+<script type="text/javascript">
+    require([
+        "jquery",
+        "domReady!"
+    ], function ($) {
+        'use strict';
+
+        //detect modes and add extra class CSS
+        const extraClass = 'ontouchstart' in window && !(/hp-tablet/gi).test(navigator.appVersion) ? 'touch' : 'no-touch';
+        $('html').addClass(extraClass);
+
+        if (AUTO_HIDE_MESSAGE !== undefined && AUTO_HIDE_MESSAGE) {
+            //set timeout to hide the message
+            clearInterval(autoHideMsg);
+            const timeout = MESSAGE_TIMEOUT ? MESSAGE_TIMEOUT : 5000;
+            var autoHideMsg = setTimeout(function () {
+                if ($(".page.messages").find('.messages').length) {
+                    $(".page.messages").find('.messages').slideUp();
+                }
+            }, timeout);
+        }
+
+    });
+</script>
+<!-- After body start content -->
+

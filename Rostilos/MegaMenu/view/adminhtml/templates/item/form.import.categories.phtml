@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+?>
+<div id="<?= $block->getNameInLayout() ?>" style="display:none;">
+    <?= $block->getFormHtml();?>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'ubImportCategories',
+        'domReady!'
+    ], function($) {
+        'use strict';
+
+        //apply import categories widget
+        $('#<?= $block->getNameInLayout() ?>').UBImportCategories(<?= $block->getWidgetOptions(); ?>);
+
+        //ajax events on import form
+        $('#import_type').on('change', function() {
+            if ($(this).val() == 2) {
+                $('.admin__field.field.field-category_ids').show();
+                $('.admin__field.field.field-category_ids').addClass('required').addClass('_required');
+                $('.admin__field.field.field-category_ids').find('#category_ids').addClass('required-entry').addClass('_required');
+            } else {
+                $('.admin__field.field.field-category_ids').hide();
+                $('.admin__field.field.field-category_ids').removeClass('required').removeClass('_required');
+                $('.admin__field.field.field-category_ids').find('#category_ids').removeClass('required-entry').removeClass('_required');
+            }
+        });
+        $('#import_type').trigger('change');
+    });
+</script>
+

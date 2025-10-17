@@ -1,0 +1,233 @@
+//
+//  Common
+//  _____________________________________________
+
+// Drill-Down
+ul.drilldown-root {
+    opacity: 1;
+}
+
+.drilldown-root {
+    position: absolute !important;
+    width: 100%;
+
+    .mega-col,
+    .child-content-inner {
+        width: 100% !important;
+    }
+
+    .parent-item {
+        color: @primary__color;
+        font-size: @font-size__base * 1.29;
+        display: block;
+        font-weight: @font-weight__heavier;
+        margin: @indent__s 0;
+    }
+
+    li.mega {
+        border-bottom: 0;
+        margin-bottom: 0;
+        width: 100%;
+
+        > .mega {
+            border-bottom: 1px solid @border-color__base;
+            color: @primary__color;
+            display: block;
+            font-weight: 400;
+            line-height: 1;
+            padding: 14px 0;
+            width: 100%;
+
+            span.menu-icon {
+                left: 5%;
+                margin: 0;
+                top: -4px;
+            }
+
+            &.has-child {
+                position: relative;
+                font-weight: @font-weight__bold;
+                text-transform: capitalize;
+                @media screen and (min-width: @screen__m){
+                    text-transform: uppercase;
+                }
+
+                span.menu-title {
+                    &:extend(.ub-icon-next all);
+
+                    &:after {
+                        position: absolute;
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.drilldown {
+    overflow: hidden;
+
+    &.sticky-disabled {
+        > .btn-drilldown {
+            position: static;
+        }
+    }
+
+    > .btn-drilldown {
+        background: @color-white;
+        border-bottom: 1px solid @border-color__base;
+        display: inline-block;
+        height: 50px;
+        left: 0;
+        margin: 0 -20px;
+        padding: 0 20px;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+        width: 100%;
+        z-index: 11;
+
+        .btn-back {
+            color: @primary__color;
+            font-weight: bold;
+            line-height: 48px;
+            padding-left: 20px;
+            position: relative;
+            &:extend(.ub-icon-prev all);
+
+            &:before {
+                position: absolute;
+                left: -4px;
+            }
+        }
+    }
+
+    &-container {
+        position: relative !important;
+    }
+
+    .menu-desc {
+        display: none !important;
+    }
+
+    .block-title {
+        margin: @indent__m 0;
+
+        strong {
+            font-size: @font-size__base;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+
+    .block.widget {
+        .products-grid {
+            .product-item {
+                width: 100% !important;
+            }
+        }
+    }
+
+    .drilldown-sub {
+        display: none;
+    }
+
+    ul {
+        margin: 0;
+        list-style: none;
+        padding: 0;
+    }
+
+
+    ul.level1,
+    ul.level2,
+    ul.level3,
+    ul.level4 {
+        display: block;
+    }
+
+    ul.level1 {
+        display: none;
+
+        &.drilldown-sub {
+            display: block;
+
+            li.mega.group {
+                > a {
+                    display: block;
+                }
+
+                ul.level2 {
+                    &.drilldown-sub {
+                        display: none;
+                    }
+
+                    li.mega.group {
+                        > a {
+                            display: block;
+                        }
+
+                        ul.level3 {
+                            &.drilldown-sub {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .child-content-inner {
+        ul.level3 {
+            &.drilldown-sub {
+                display: block;
+
+                li.mega.group {
+                    ul.level4 {
+                        &.drilldown-sub {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mega-with-thumb {
+        ul.mega-menu {
+            li {
+                width: 100%;
+                text-align: center;
+
+                img {
+                    float: none;
+                }
+
+                span.menu-title {
+                    display: block;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
+
+.nav-sections {
+    .drilldown {
+        > .btn-drilldown {
+            padding: 0;
+        }
+    }
+}
+
+
+//
+//  Tablet and Desktop
+//  _____________________________________________
+@media screen and (min-width: @screen__m) {
+    .drilldown {
+        max-width: 360px;
+    }
+}

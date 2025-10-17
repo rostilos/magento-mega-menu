@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+?>
+<!-- Initial ajax wishlist js function -->
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Rostilos_Base/js/ajaxWishlist",
+        "domReady!"
+    ], function ($) {
+        'use strict';
+
+        const options = <?= $block->getAjaxWishlistOptions() ?>;
+        options.messageTimeout = MESSAGE_TIMEOUT ? MESSAGE_TIMEOUT : 5000;
+        $.ub.AjaxWishlist(options);
+    });
+</script>
+
+

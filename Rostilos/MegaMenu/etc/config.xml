@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <rsmegamenu>
+            <general>
+                <enable_sticky>0</enable_sticky>
+                <is_mega_menu>1</is_mega_menu>
+                <is_mobile_menu>0</is_mobile_menu>
+                <show_number_product>0</show_number_product>
+                <mega_style>1</mega_style>
+                <default_mega_col_width>200</default_mega_col_width>
+                <mega_col_margin>0</mega_col_margin>
+                <start_level>0</start_level>
+                <end_level>5</end_level>
+                <animation>none</animation>
+                <addition_class></addition_class>
+                <mega_content_visible_in>mobile,tablet,desktop</mega_content_visible_in>
+                <offcanvas_breakpoint>mobile</offcanvas_breakpoint>
+                <auto_sync_category_menu_item>1</auto_sync_category_menu_item>
+                <auto_sync_cmspage_menu_item>0</auto_sync_cmspage_menu_item>
+                <cache_lifetime>86400</cache_lifetime>
+            </general>
+        </rsmegamenu>
+    </default>
+</config>

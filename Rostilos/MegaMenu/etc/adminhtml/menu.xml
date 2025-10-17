@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Rostilos_MegaMenu::rsmegamenu_content"
+             title="Mega Menu"
+             module="Rostilos_MegaMenu"
+             sortOrder="51" parent="Rostilos_Base::menu"
+             resource="Rostilos_MegaMenu::rsmegamenu_content" />
+        <add id="Rostilos_MegaMenu::group" title="Manage Menu" module="Rostilos_MegaMenu" sortOrder="0"
+             parent="Rostilos_MegaMenu::rsmegamenu_content" action="rsmegamenu/group"
+             resource="Rostilos_MegaMenu::group"/>
+        <add id="Rostilos_MegaMenu::settings" title="Settings" module="Rostilos_MegaMenu" sortOrder="1"
+             parent="Rostilos_MegaMenu::rsmegamenu_content" action="adminhtml/system_config/edit/section/rsmegamenu"
+             resource="Rostilos_MegaMenu::settings"/>
+    </menu>
+</config>

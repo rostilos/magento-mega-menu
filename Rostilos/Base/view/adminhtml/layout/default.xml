@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rostilos. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Rostilos_Base::css/font-awesome.min-5.14.0.css"/>
+        <css src="Rostilos_Base::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Backend\Block\Template" template="Rostilos_Base::init_menu.phtml" />
+        </referenceContainer>
+    </body>
+</page>

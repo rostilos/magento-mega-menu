@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+        <css src="Rostilos_Base::css/select2.min.css" />
+    </head>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Rostilos\MegaMenu\Block\Adminhtml\Item\Edit" name="rsmegamenu_item_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Rostilos\MegaMenu\Block\Adminhtml\Item\Edit\Tabs" name="rsmegamenu_item_edit_tabs">
+                <block class="Rostilos\MegaMenu\Block\Adminhtml\Item\Edit\Tab\Main" name="rsmegamenu_item_edit_tab_main"/>
+                <block class="Rostilos\MegaMenu\Block\Adminhtml\Item\Edit\Tab\MegaSetting" name="rsmegamenu_item_edit_tab_mega_setting"/>
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">rsmegamenu_item_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mega_setting_section</argument>
+                    <argument name="block" xsi:type="string">rsmegamenu_item_edit_tab_mega_setting</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" template="Rostilos_MegaMenu::item/edit_js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

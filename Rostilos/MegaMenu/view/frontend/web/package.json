@@ -1,0 +1,13 @@
+{
+  "name": "Ubertheme_UbMegaMenu",
+  "version": "1.0.0",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-less": "^5.0.0"
+  },
+  "dependencies": {
+    "gulp-less-sourcemap": "^1.4.4",
+    "gulp-sourcemaps": "^3.0.0"
+  }
+}

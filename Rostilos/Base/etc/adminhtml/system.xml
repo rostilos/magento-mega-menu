@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rostilos. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="rostilos" translate="label" sortOrder="999" class="tab-rostilos">
+            <label>Rostilos Extensions</label>
+        </tab>
+        <section id="rostilos_general" translate="label" type="text" sortOrder="9998" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label><![CDATA[Settings]]></label>
+            <tab>rostilos</tab>
+            <class>separator-top</class>
+            <resource>Rostilos_Base::settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>General Config</label>
+                <field id="enable_animate_css" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Animate.css</label>
+                    <comment><![CDATA[Set Yes to enable <a href="https://animate.style" target="_blank">Animate.css</a>, a library of animations for use in your site.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_font_awesome" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Font Awesome</label>
+                    <comment><![CDATA[Set Yes to enable <a href="https://fontawesome.com/icons?d=gallery&p=2&m=free" target="_blank">Font Awesome</a> for use in your site.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_ajax_add_cart" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax Add To Cart</label>
+                    <comment>If Yes, a product is added to cart without the need to reload the entire site.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_ajax_compare" translate="label comment" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax Add To Compare</label>
+                    <comment>If Yes, a product is added to Compare Product report without the need to reload the entire site.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_ajax_wishlist" translate="label comment" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax Add To Wishlist</label>
+                    <comment>If Yes, a product is added the Wishlist without the need to reload the entire site.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="auto_hide_message" translate="label comment" type="select" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto Hide Message</label>
+                    <comment>If Yes, the system message will be automatically hidden after a number of seconds (specified timeout duration).</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="message_timeout" translate="label comment" type="text" sortOrder="51"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message Timeout</label>
+                    <comment>Enter number of milliseconds before the message times out. Leave blank to use the default value = 5000.</comment>
+                    <depends>
+                        <field id="auto_hide_message">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

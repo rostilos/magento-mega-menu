@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php
+/* @var $block \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element */
+$element = $block->getElement();
+$note = $element->getNote() ? '<div class="note" id="' . $element->getId() . '-note">' . $element->getNote() . '</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox admin__control-checkbox' || $element->getExtType() == 'radio admin__control-radio';
+$addOn = ($element->getBeforeElementHtml() || $element->getAfterElementHtml()) && !$element->getNoWrapAsAddon();
+$fieldId = ($element->getHtmlContainerId()) ? ' id="' . $element->getHtmlContainerId() . '"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($addOn) ? ' with-addon' : '';
+$fieldClass .= ($element->getRequired()) ? ' required _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= (!$element->getLabelHtml()) ? ' no-label' : '';
+
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" '
+    . $block->getUiId('form-field', $element->getId())
+    . ($element->getFieldExtraAttributes() ? ' ' . $element->getFieldExtraAttributes() : '');
+
+$elementHTML = $element->getElementHtml();
+$elementHTML = str_replace('<select', '<select style="width:350px;"', $elementHTML);
+?>
+
+<?php if (!$element->getNoDisplay()): ?>
+    <?php if ($element->getType() == 'hidden'): ?>
+        <?= $elementHTML ?>
+    <?php else: ?>
+        <div<?php /* @escapeNotVerified */ echo $fieldAttributes ?>>
+            <?php if ($elementBeforeLabel): ?>
+                <?= $elementHTML ?>
+                <?= $element->getLabelHtml() ?>
+                <?php /* @escapeNotVerified */ echo $note ?>
+            <?php else: ?>
+                <?= $element->getLabelHtml() ?>
+                <?php  ?>
+                <div class="admin__field-control control">
+                    <?php /* @escapeNotVerified */ echo($addOn)
+                        ? '<div class="admin__field">' . $elementHTML . '</div>'
+                        : $elementHTML ?>
+                    <?php /* @escapeNotVerified */ echo $note ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($element->getScopeLabel()): ?>
+                <div class="field-service" value-scope="<?php /* @escapeNotVerified */ echo $element->getScopeLabel()?>">
+                </div>
+            <?php endif;?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+<!-- Start append custom code: Categories Selector with ajax suggest -->
+<script>
+    require([
+        'jquery',
+        'Rostilos_Base/js/select2.full'
+    ], function ($) {
+        $('#item_<?= $element->getId()?>').select2({
+            placeholder: '<?= __('-- Select category --')?>',
+            allowClear: true
+        }).on("select2:unselecting", function(e) {
+            $(this).data('state', 'unselected');
+        }).on("select2:open", function(e) {
+            if ($(this).data('state') === 'unselected') {
+                $(this).removeData('state');
+
+                var self = $(this);
+                setTimeout(function() {
+                    self.select2('close');
+                }, 1);
+            }
+        });
+    });
+</script>
+

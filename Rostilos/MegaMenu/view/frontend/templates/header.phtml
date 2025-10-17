@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+?>
+
+<div id="header"
+     class="relative z-50 w-full"
+     @keydown.window.escape="searchOpen = false;"
+>
+    <div class="container">
+        <!--Main Navigation-->
+        <div class="relative sections nav-sections min-h-[50px] text-black
+                    transition-all bg-geGreen-medium font-montserrat">
+            <span class="absolute left-sub width-sub top-0 bg-geGreen-medium h-full"></span>
+            <div class="absolute top-0 left-0 py-4 px-5 off-canvas-menu-img">
+                <?= $block->getChildHtml('logo'); ?>
+            </div>
+            <div class="section-item-content nav-sections-item-content relative" :class="{'max-h-screen overflow-hidden' : isLoading}" >
+                <?= $block->getChildHtml('rs-topmenus') ?>
+            </div>
+
+            <span class="absolute right-sub width-sub top-0 bg-geGreen-medium h-full"></span>
+            <div x-show="isLoading" class="loader absolute w-full md-ge-menu:w-screen md-ge-menu:h-[50px]">
+                <?= $block->getChildHtml('loader') ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('[data-action="toggle-nav"]').addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('load-mobile-menu'));
+    })
+</script>

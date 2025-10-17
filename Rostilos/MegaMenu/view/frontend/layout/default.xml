@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Rostilos_MegaMenu::js/rs-menu-js.js"/>
+        <css src="Rostilos_MegaMenu/css/module.css" />
+    </head>
+    <body>
+        <referenceContainer name="header.container">
+            <block name="header-content" template="Rostilos_MegaMenu::header.phtml">
+                <block name="main.rostilos.mega.menu"
+                       template="Rostilos_MegaMenu::menus.phtml"
+                       as="rs-topmenus">
+                    <arguments>
+                        <argument xsi:type="object" name="view_model">Rostilos\MegaMenu\ViewModel\Menu</argument>
+                    </arguments>
+                </block>
+                <block name="cart-drawer" template="Magento_Theme::html/cart/cart-drawer.phtml" ifconfig="checkout/sidebar/display">
+                    <block name="cart-drawer-loading" as="loading" template="Hyva_Theme::ui/loading.phtml"/>
+                    <block class="Magento\Checkout\Block\QuoteShortcutButtons" name="extra_actions"/>
+                    <container name="cart-drawer.top"/>
+                    <container name="cart-drawer.items.before"/>
+                    <container name="cart-drawer.totals.before"/>
+                    <container name="cart-drawer.bottom"/>
+                </block>
+
+            </block>
+        </referenceContainer>
+        <referenceBlock name="navigation.sections" remove="true" />
+        <referenceBlock name="catalog.topnav" remove="true"/>
+    </body>
+</page>

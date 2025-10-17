@@ -1,0 +1,73 @@
+directive @doc(description: String="") on QUERY
+    | MUTATION
+    | FIELD
+    | FRAGMENT_DEFINITION
+    | FRAGMENT_SPREAD
+    | INLINE_FRAGMENT
+    | SCHEMA
+    | SCALAR
+    | OBJECT
+    | FIELD_DEFINITION
+    | ARGUMENT_DEFINITION
+    | INTERFACE
+    | UNION
+    | ENUM
+    | ENUM_VALUE
+    | INPUT_OBJECT
+    | INPUT_FIELD_DEFINITION
+directive @resolver(class: String) on FIELD_DEFINITION
+directive @cache(cacheable: Boolean) on FIELD_DEFINITION
+
+type HtmlResponse {
+    html: String
+}
+
+type Query {
+    renderBlock(
+        menu_key:[String]! @doc(description: "Menu identifier"),
+        device_type: [String]! @doc(description: "Device: mobile,tablet,desktop")
+    ): HtmlResponse @resolver(class: "Rostilos\\MegaMenu\\Model\\Resolver\\MenuBlockResolver") @doc(description: "Custom Resolver")
+    menuItems (
+        menuKey: String @doc(description: "The key of Menu Group")
+        parentId: Int @doc(description: "The Menu Item Parent Id")
+    ): MenuItems @resolver(class: "Rostilos\\MegaMenuGraphQl\\Model\\Resolver\\MenuTree") @doc(description: "The query returns information about tree menu items") @cache(cacheIdentity: "Rostilos\\MegaMenuGraphQl\\Model\\Resolver\\Item\\Identity")
+}
+
+type MenuItems @doc(description: "Menu items information") {
+    menu_key: String @doc(description: "The key of Menu Group")
+    menu_title: String @doc(description: "The title of Menu Group")
+    back_item: BackItem @doc(description: "The BackItem Object")
+    items: [MenuItem] @doc(description: "Array of Menu Items")
+}
+
+type MenuItem @doc(description: "MenuItem defines all information of a menu item") {
+    id: Int @doc(description: "Id of Menu Item")
+    title: String @doc(description: "Title of Menu Item")
+    show_title: Int @doc(description: "Enable to show Title of Menu Item")
+    path: String @doc(description: "Path of Menu Item")
+    parent: Int @doc(description: "Id of Menu Item Parent")
+    level: Int @doc(description: "Level of Menu Item")
+    link: String @doc(description: "Link of Menu Item")
+    link_type: String @doc(description: "Type of Menu Item link")
+    is_group: Int @doc(description: "Is a menu item group?"),
+    additional_class: String @doc(description: "The additional css classes for a menu item"),
+    childs: [MenuItem] @doc(description: "An array of Menu Items children")
+    mega_setting: MegaSetting @doc(description: "The mega settings of menu item"),
+}
+
+type MegaSetting @doc(description: "Extra settings of a Menu Item.") {
+    id: Int @doc(description: "Id of Menu Item"),
+    column_number: Int @doc(description: "The number of columns"),
+    column_wrapper_width: Int @doc(description: "The width of wrapper of columns"),
+    column_x_width: String @doc(description: "The width settings for columns"),
+    column_default_width: Int @doc(description: "The default width of a column (px)"),
+    column_width_type: Int @doc(description: "The base width type of column (1-px/2-%)"),
+    rich_content: String @doc(description: "Mega content of a Menu Item"),
+    description: String @doc(description: "Description of a Menu Item"),
+    visibility: String @doc(description: "Visibility of mega content of a Menu Item"),
+}
+
+type BackItem @doc(description: "BackItem defines all information needed for back event in OffCanvas menu") {
+    id: Int @doc(description: "Id of Menu Item")
+    title: String @doc(description: "Title of Menu Item")
+}

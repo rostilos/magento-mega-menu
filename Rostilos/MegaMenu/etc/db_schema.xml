@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="rsmegamenu_group" resource="default" engine="innodb" comment="Mega Menu Group Table">
+        <column xsi:type="smallint" name="group_id" unsigned="true" nullable="false" identity="true"
+                comment="Menu Group ID"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="true" comment="Menu Group Title"/>
+        <column xsi:type="varchar" name="identifier" length="100" nullable="true" default="null"
+                comment="Menu Group Key"/>
+        <column xsi:type="varchar" name="animation_type" length="100" nullable="true" default="null"
+                comment="Animation effect you want to display sub-menu items"/>
+        <column xsi:type="varchar" name="mobile_type" length="100" nullable="true"
+                comment="Type you want to display sub-menu items in Mobile"/>
+        <column xsi:type="mediumtext" name="description" nullable="true"
+                comment="Menu Group Description"/> <column xsi:type="timestamp" name="creation_time" nullable="false" default="CURRENT_TIMESTAMP"
+                                                           comment="Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="true"
+                comment="Modification Time"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" default="1"
+                comment="Is Active"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="false" default="0"
+                comment="Sort Order"/>
+        <column xsi:type="varchar" name="menu_type" length="100" nullable="true"
+                comment="Type you want to display sub-menu items"/>
+        <column xsi:type="varchar" name="menu_position" length="100" nullable="true"
+                comment="The position you want to display the menu"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="group_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="RSMEGAMENU_GROUP_IDENTIFIER_UNIQUE">
+            <column name="identifier"/>
+        </constraint>
+    </table>
+
+    <table name="rsmegamenu_group_store" resource="default" engine="innodb"
+           comment="Mega Menu Group To Store Linkage Table">
+        <column xsi:type="smallint" name="group_id" unsigned="true" nullable="false" comment="Menu Group ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" comment="Store ID"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="group_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="RSMEGAMENU_GROUP_STORE_GROUP_ID_RSMEGAMENU_GROUP_GROUP_ID"
+                    table="rsmegamenu_group_store"
+                    column="group_id" referenceTable="rsmegamenu_group" referenceColumn="group_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="RSMEGAMENU_GROUP_STORE_STORE_ID_STORE_STORE_ID"
+                    table="rsmegamenu_group_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="RSMEGAMENU_GROUP_STORE_STORE_ID_INDEX" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+
+    <table name="rsmegamenu_group_customer_group" resource="default" engine="innodb"
+           comment="Mega Menu Group To Customer Group Linkage Table">
+        <column xsi:type="smallint" name="group_id" unsigned="true" nullable="false" comment="Menu Group ID"/>
+        <column xsi:type="smallint" name="customer_group_id" unsigned="true" nullable="false" comment="Customer Group ID"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="group_id"/>
+            <column name="customer_group_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="RSMEGAMENU_GROUP_CGR_GROUP_ID_RSMEGAMENU_GROUP_GROUP_ID"
+                    table="rsmegamenu_group_customer_group"
+                    column="group_id" referenceTable="rsmegamenu_group" referenceColumn="group_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="RSMEGAMENU_GROUP_CUSTOMER_GROUP_ID_INDEX" indexType="btree">
+            <column name="customer_group_id"/>
+        </index>
+    </table>
+
+    <table name="rsmegamenu_item" resource="default" engine="innodb" comment="Mega Menu Items Table">
+        <column xsi:type="smallint" name="item_id" unsigned="false" nullable="false" identity="true"
+                comment="Menu Item ID"/>
+        <column xsi:type="smallint" name="parent_id" unsigned="false" nullable="false" default="0"
+                comment="Menu Item Parent ID"/>
+        <column xsi:type="smallint" name="group_id" unsigned="true" nullable="false" comment="Menu Group ID"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="true" comment="Menu Item Title"/>
+        <column xsi:type="varchar" name="identifier" length="255" nullable="true" comment="Menu Item Identifier"/>
+        <column xsi:type="varchar" name="path" length="255" nullable="true" comment="Menu Item Tree Path"/>
+        <column xsi:type="int" name="level" unsigned="false" nullable="false" default="1"
+                comment="Menu Item Level"/> <column xsi:type="smallint" name="show_title" unsigned="false" nullable="false" default="1"
+                                                    comment="Show/Hide Menu Item Title"/>
+        <column xsi:type="varchar" name="icon_image" length="255" nullable="true" comment="Icon Image of Menu Item"/>
+        <column xsi:type="varchar" name="font_awesome" length="50" nullable="true" comment="Font Awesome Icon Class Name"/>
+        <column xsi:type="varchar" name="link_type" length="50" nullable="false" default="custom_link"
+                comment="Link type of Menu Item Link(custom_link, category_page, cms_page)"/>
+        <column xsi:type="varchar" name="link" length="500" nullable="true" comment="Menu Item Link"/>
+        <column xsi:type="varchar" name="link_target" length="50" nullable="false" default="_self"
+                comment="Menu Item Link Target Value (_blank,_self,_parent,_top)"/>
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="true" comment="Category ID"/> <column xsi:type="smallint" name="show_number_product" unsigned="false" nullable="false" default="0"
+                                                                                                                  comment="Show number products of category"/>
+        <column xsi:type="varchar" name="cms_page" length="255" nullable="true" comment="ID of CMS page"/>
+        <column xsi:type="smallint" name="is_group" unsigned="false" nullable="false" default="0"
+                comment="Is Menu Item Group"/>
+        <column xsi:type="int" name="mega_cols" unsigned="false" nullable="true"
+                comment="Number columns of sub-menu"/>
+        <column xsi:type="int" name="mega_width" unsigned="false" nullable="true"
+                comment="Width of sub-menu wrapper (px)"/>
+        <column xsi:type="int" name="mega_col_width" unsigned="false" nullable="true"
+                comment="Width of a column in sub-menu"/>
+        <column xsi:type="varchar" name="mega_col_x_width" length="500" nullable="true"
+                comment="Width of column x in sub-menu"/>
+        <column xsi:type="varchar" name="mega_sub_content_type" length="50" nullable="false"
+                comment="Type of sub content(Child menu items, Static blocks, Custom Content)"/>
+        <column xsi:type="mediumtext" name="custom_content" nullable="true"
+                comment="Custom Content (Block short code/Html/Text)"/>
+        <column xsi:type="varchar" name="static_blocks" length="500" nullable="true"
+                comment="List IDs of CMS Static Blocks"/>
+        <column xsi:type="varchar" name="addition_class" length="50" nullable="true"
+                comment="Addition Class CSS for menu item"/>
+        <column xsi:type="varchar" name="description" length="500" nullable="true" comment="Menu Item Description"/>
+        <column xsi:type="timestamp" name="creation_time" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Menu Item Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="true"
+                comment="Menu Item Modification Time"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" default="1"
+                comment="Is Menu Item Active"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="false" default="0"
+                comment="Menu Item Sort Order"/>
+
+        <column xsi:type="smallint" name="visible_option" unsigned="false" nullable="false" default="0"
+                comment="Options: 0 - Use general config / 1 - Customize"/>
+        <column xsi:type="varchar" name="visible_in" length="100" nullable="false"
+                comment="Visible in: desktop, tablet, mobile"/>
+        <column xsi:type="varchar" name="seo_title" length="255" nullable="true" comment="Menu item SEO title"/>
+        <column xsi:type="smallint" name="mega_base_width_type" unsigned="false" nullable="false" default="1"
+                comment="Base column's width type: 1 - pixel(px), 2 - percent(%)"/>
+        <column xsi:type="smallint" name="is_show_category_thumb" unsigned="false" nullable="false" default="0"
+                comment="Is show category thumbnail"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="item_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="RSMEGAMENU_ITEM_GROUP_ID_RSMEGAMENU_GROUP_GROUP_ID"
+                    table="rsmegamenu_item"
+                    column="group_id" referenceTable="rsmegamenu_group" referenceColumn="group_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="RSMEGAMENU_ITEM_GROUP_ID_PARENT_ID_INDEX" indexType="btree">
+            <column name="group_id"/>
+            <column name="parent_id"/>
+        </index>
+    </table>
+</schema>

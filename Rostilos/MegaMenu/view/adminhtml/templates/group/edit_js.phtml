@@ -1,0 +1,83 @@
+<?php
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+
+    /** @var \Rostilos\MegaMenu\Model\Group $menuGroup */
+    //get current menu group id
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    $groupId = (int)$om->get('Magento\Backend\Model\Session')->getMenuGroupId();
+    $groupId = (int)$om->get('\Magento\Backend\App\Action\Context')->getRequest()->getParam('group_id', $groupId);
+    $menuGroup = $om->get('Rostilos\MegaMenu\Model\Group');
+    if ($groupId) {
+        $menuGroup->load($groupId);
+    }
+?>
+
+<script>
+    require([
+        "jquery",
+        'mage/translate',
+        'domReady!'
+        ], function($) {
+
+        //add global tip
+        let note = $.mage.__('Menu group holds a group of menu items. ');
+        note += $.mage.__('You can create multiple menu groups and assign each group to different positions such as Main Menu, Sidebar, or Footer.<br/><br/>');
+        $('#group_base_fieldset > .messages').html(note);
+
+        const selectedMenuType = $('#group_menu_type').val();
+        const menuTypes = $.parseJSON('<?= $menuGroup->getMenuTypeOptions()?>');
+        let menuTypeOptions = [];
+
+        $('#group_menu_position').on('change', function() {
+            //auto set identifier if the position = main
+            if ($(this).val() === 'main') {
+                $('#group_identifier').val('main-menu').addClass('disabled').attr('readonly', true);
+            } else {
+                $('#group_identifier').removeClass('disabled').attr('readonly', false);
+            }
+
+            //auto fill menu type options
+            if($(this).val() === 'main') {
+                menuTypeOptions = menuTypes.main;
+            } else if ($(this).val() === 'sidebar') {
+                menuTypeOptions = menuTypes.sidebar;
+            } else if ($(this).val() === 'footer') {
+                menuTypeOptions = menuTypes.footer;
+            } else { //other
+                menuTypeOptions = menuTypes.other;
+            }
+
+            //remove current options
+            $('#group_menu_type').empty();
+
+            // append new options
+            $.each(menuTypeOptions, function() {
+                const option = $('<option>').attr('value', this.key).html(this.value);
+                $('#group_menu_type').append(option);
+            });
+
+            //update assigned menu type
+            $('#group_menu_type').val(selectedMenuType);
+        });
+        $('#group_menu_position').trigger('change');
+
+        //show/hide menu on mobile field
+        $('#group_menu_type').on('change', function() {
+            if ($(this).val() === 'vertical' || $(this).val() === 'horizontal') {
+                $('div.field-mobile_type').show();
+            } else {
+                $('div.field-mobile_type').hide();
+            }
+            if ($(this).val() === 'horizontal') {
+                $('div.field-animation_type').show();
+            } else {
+                $('div.field-animation_type').hide();
+            }
+        });
+        $('#group_menu_type').trigger('change');
+    });
+</script>
+
+

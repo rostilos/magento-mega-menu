@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <rostilos_general>
+            <general>
+                <old_enable>1</old_enable>
+                <enable>0</enable>
+                <enable_animate_css>1</enable_animate_css>
+                <enable_font_awesome>1</enable_font_awesome>
+                <enable_ajax_add_cart>0</enable_ajax_add_cart>
+                <enable_ajax_compare>0</enable_ajax_compare>
+                <enable_ajax_wishlist>0</enable_ajax_wishlist>
+                <auto_hide_message>1</auto_hide_message>
+                <message_timeout>5000</message_timeout>
+            </general>
+        </rostilos_general>
+    </default>
+</config>

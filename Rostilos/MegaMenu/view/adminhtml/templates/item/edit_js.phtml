@@ -1,0 +1,158 @@
+<?php
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+?>
+<script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/alert',
+        'domReady!'
+        ], function($) {
+
+        //show/hide custom_content field
+        $('#item_mega_sub_content_type').on('change', function() {
+            var contentType = $(this).val();
+            if (contentType === 'custom-content') {
+                $('div.field-custom_content').show();
+            } else {
+                $('div.field-custom_content').hide();
+            }
+            if (contentType === 'static-block') {
+                $('div.field-static_blocks').show();
+            } else {
+                $('div.field-static_blocks').hide();
+            }
+            //show/hide visible option field
+            /*if (contentType == 'custom-content' || contentType == 'static-block') {
+                $('div.field-visible_option').show();
+            } else {
+                if (!$('#item_description').val().length) {
+                    $('div.field-visible_option').hide();
+                    $('div.field-visible_in').hide();
+                }
+            }*/
+        });
+
+        $('#item_mega_sub_content_type').trigger('change');
+
+        //show hide related fields with item_description
+        $('#item_description').on('change', function() {
+            if ($(this).val()) {
+                $('div.field-visible_option').show();
+            } else {
+                $('div.field-visible_option').hide();
+                $('div.field-visible_in').hide();
+            }
+        });
+
+        //show/hide columns setting fields
+        $('#item_mega_cols').on('blur', function() {
+            var numberColumns = parseInt($(this).val());
+            if (numberColumns > 1) {
+                $('div.field-mega_col_width').show().find('input').focus();
+                $('div.field-mega_col_x_width').show();
+            } else {
+                $('div.field-mega_col_width').hide();
+                $('div.field-mega_col_x_width').hide();
+            }
+        });
+        $('#item_mega_cols').trigger('blur');
+
+        //event when item_link_type change
+        $('#item_link_type').on('change', function() {
+            //show/hide target_link field
+            var linkType = $(this).val();
+            if (linkType === 'no-link') {
+                $('div.field-link_target').hide();
+            } else {
+                $('div.field-link_target').show();
+            }
+            var $cmsPage = $('#item_cms_page');
+            if ($(this).val() == 'cms-page' && !$cmsPage.hasClass('loaded')) {
+                //ajax request to get cms page options
+                $.ajax({
+                    type: "POST",
+                    url: "<?= $block->getUrl('rsmegamenu/item/ajaxGetCMSPageOptions', []); ?>",
+                    data: {
+                        menu_group_id: $('#item_group_id').val(),
+                        item_id: $('#item_item_id').val(),
+                        form_key: window.FORM_KEY
+                    },
+                    success: function(rs) {
+                        if (rs.success) {
+                            if (typeof rs.options == 'object') {
+                                //append options to select box
+                                $.each(rs.options, function (value, label) {
+                                    var $option = $('<option></option>').val(value).html(label);
+                                    //bind selected
+                                    if ( typeof rs.selected_options == 'object') {
+                                        $.each(rs.selected_options, function (i, selected_value) {
+                                            if (selected_value == value) {
+                                                $option.prop('selected', true);
+                                            }
+                                        });
+                                    }
+                                    $cmsPage.append($option);
+                                });
+                            }
+                            //update status loaded
+                            $cmsPage.addClass('loaded');
+                        } else {
+                            $.mage.alert({title: rs.message});
+                        }
+                    }, error: function(xhr, status, error) {
+                        $.mage.alert({title: error});
+                    },
+                });
+            }
+        });
+        $('#item_link_type').trigger('change');
+
+        //event when item_mega_sub_content_type change
+        $('#item_mega_sub_content_type').on('change', function() {
+            var $cmsBlocks = $('#item_static_blocks');
+            if ($(this).val() == 'static-block' && !$cmsBlocks.hasClass('loaded')) {
+                //ajax request to get static block options
+                $.ajax({
+                    type: "POST",
+                    url: "<?= $block->getUrl('rsmegamenu/item/ajaxGetStaticBlockOptions', []); ?>",
+                    data: {
+                        menu_group_id: $('#item_group_id').val(),
+                        item_id: $('#item_item_id').val(),
+                        form_key: window.FORM_KEY
+                    },
+                    success: function(rs) {
+                        if (rs.success) {
+                            if (typeof rs.options == 'object') {
+                                //append options to select box
+                                $.each(rs.options, function (value, label) {
+                                    var $option = $('<option></option>').val(value).html(label);
+                                    //bind selected
+                                    if ( typeof rs.selected_options == 'object') {
+                                        $.each(rs.selected_options, function (i, selected_value) {
+                                            if (selected_value == value) {
+                                                $option.prop('selected', true);
+                                            }
+                                        });
+                                    }
+                                    $cmsBlocks.append($option);
+                                });
+                            }
+                            //update status loaded
+                            $cmsBlocks.addClass('loaded');
+                        } else {
+                            $.mage.alert({title: rs.message});
+                        }
+                    }, error: function(xhr, status, error) {
+                        $.mage.alert({title: error});
+                    },
+                });
+            }
+        });
+        $('#item_mega_sub_content_type').trigger('change');
+
+    });
+</script>
+
+

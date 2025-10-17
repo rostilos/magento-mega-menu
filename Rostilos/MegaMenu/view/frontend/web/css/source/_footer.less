@@ -1,0 +1,91 @@
+//
+//  Common
+//  _____________________________________________
+
+    .page-footer {
+        .footer_menu-root {
+            opacity: 1;
+        }
+        .ub-footer-mega-menu {
+            &:before,
+            &:after {
+                content: '';
+                display: table;
+            }
+
+            &:after {
+                clear: both;
+            }
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .level0 {
+            > li.mega {
+                &.dynamic-width {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+                &.has-child {
+                    > .mega {
+                        padding: 0
+                    }
+                }
+            }
+            ul.level1 {
+                >li.mega {
+                    .content {
+                        margin-top: 10px
+                    }
+                    &.group {
+                        > a {
+                            font-weight: @font-weight__bold;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+@media screen and (max-width: @screen__m) {
+    .page-footer {
+        .level0 {
+            > li.mega {
+                width: 100%;
+                border-bottom: 0;
+                &.dynamic-width {
+                    flex-direction: column;
+                }
+                .mega-col {
+                    width: 100% !important;
+                    margin-bottom: @indent__s;
+                }
+                .menu-group-link {
+                    display: none
+                }
+            }
+        }
+    }
+}
+
+//
+//  Tablet and Desktop
+//  _____________________________________________
+@media screen and (min-width: @screen__m){
+    .page-footer {
+        .level0 {
+            > li.mega {
+                &.dynamic-width {
+                    flex-direction: row;
+                }
+            }
+        }
+    }
+}

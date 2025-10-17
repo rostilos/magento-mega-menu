@@ -1,0 +1,13 @@
+<svg width="573" height="101" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Rostilos Logo</title>
+  <rect fill="none" id="canvas_background" height="103" width="575" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Logo</title>
+  <text stroke="#000" transform="matrix(3.772156299176288,0,0,3.772156299176288,-368.3187638529288,-238.00526829410703) " font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_1" y="84.833993" x="97.648033" stroke-width="0" fill="#fff">UBERTHEME</text>
+ </g>
+</svg>

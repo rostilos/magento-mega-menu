@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="rostilos" translate="label" sortOrder="999">
+            <label>Rostilos</label>
+        </tab>
+        <section id="rsmegamenu" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>UB Mega Menu</label>
+            <tab>rostilos</tab>
+            <resource>Rostilos_MegaMenu::settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="old_enable" translate="label comment" type="select" sortOrder="0"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Old Menu</label>
+                    <comment><![CDATA[Set Yes to enable old native menu.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable" translate="label comment" type="select" sortOrder="0"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Mega Menu</label>
+                    <comment><![CDATA[Set Yes to enable Storefront Menu.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_sticky" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Sticky</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Applicable to the top main menu.</comment>
+                </field>
+                <field id="show_number_product" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Product Quantity</label>
+                    <comment>Apply for Category Menu Type only.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_mega_col_width" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Mega Column Width</label>
+                    <comment>Set a default value(px)</comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-0-1900</validate>
+                </field>
+                <field id="mega_content_visible_in" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Mega Content On</label>
+                    <source_model>Rostilos\MegaMenu\Model\Config\Source\Devices</source_model>
+                    <comment>Mega Content (Description, Custom Content, Static Blocks) will be enabled for all devices by default. Deselect specific devices you wish to hide mega content.</comment>
+                </field>
+                <field id="end_level" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Menu Level Limit</label>
+                    <comment>
+                        Specify the number of levels of menu items displayed in the storefront.
+                        Enter 1 to display 1st-level menu items, enter 2 to display 1st-level and 2nd-level menu items, enter 3 to display 1st-level, 2nd-level, and 3rd-level menu items, and so on.
+                        Default value is 10.
+                    </comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-0-10</validate>
+                </field>
+                <field id="offcanvas_breakpoint" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Off-canvas From</label>
+                    <source_model>Rostilos\MegaMenu\Model\Config\Source\OffcanvasBreakpoint</source_model>
+                    <comment><![CDATA[- Mobile: Off-canvas menu is enabled on Mobile and Tablet Portrait by default. Tablet Landscape is inherited from the Desktop menu.<br/>- All Devices: If enabled, off-canvas is always applied to all devices (Desktop, Tablet, Mobile)]]></comment>
+                </field>
+                <field id="auto_sync_category_menu_item" translate="label comment" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto submenu sync</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Yes, whenever you create a new sub-category associated with a parent category available in your mega menu, a submenu item for such sub-category will automatically be created. Default value is Yes.</comment>
+                </field>
+                <field id="auto_sync_cmspage_menu_item" translate="label comment" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto CMS Page Sync</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Yes, when you remove a CMS page, menu items associated with such CMS page will be automatically deleted. Default value is No. </comment>
+                </field>
+                <field id="cache_lifetime" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cache Lifetime (seconds)</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

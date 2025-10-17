@@ -1,0 +1,261 @@
+<?php
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+?>
+
+<?php /** @var \Rostilos\MegaMenu\Block\Adminhtml\TreeMenu $block  */?>
+
+<section class="page-menu-items" xmlns="http://www.w3.org/1999/html">
+    <div class="rostilos-mega-menu-tree">
+        <div class="row">
+            <div class="col-m-12">
+                <div id="menu-loading"></div>
+                <div class="col-m-6">
+                    <fieldset class="fieldset admin__fieldset pull-left">
+                        <div class="admin__field field">
+                            <label class="label admin__field-label" for="menu_group_id"><span><?= __('Menu Group') ?></span></label>
+                            <div class="admin__field-control control">
+                                <select id="menu_group_id" class="admin__control-select">
+                                    <?php
+                                        $options = $block->getMenuGroupOptions();
+                                        $om = \Magento\Framework\App\ObjectManager::getInstance();
+                                        $groupId = (int)$om->get('Magento\Backend\Model\Session')->getMenuGroupId();
+                                        $groupId = (int)$om->get('\Magento\Backend\App\Action\Context')->getRequest()->getParam('group_id', $groupId);
+                                        foreach ($options as $key => $value) {
+                                            $selected = ($key == $groupId) ? 'selected' : '';
+                                            $url = $block->getUrl('rsmegamenu/item/index', ['group_id' => $key]);
+                                            echo '<option value="'.$url.'" '.$selected.'>'.$value.'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <menu id="nestable-menu" class="pull-right">
+                        <button type="button" data-action="expand-all"><i class="fa fa-plus"></i> <?= __('Expand All');?></button>
+                        <button type="button" data-action="collapse-all"><i class="fa fa-minus"></i> <?= __('Collapse All'); ?></button>
+                    </menu>
+                </div>
+                <div class="col-m-6">
+                    <div class="page-actions">
+                        <a id="btn-add" class="action action-secondary" href="<?= $block->getUrl('rsmegamenu/group/index', []); ?>">
+                            <span><i class="fa fa-list"></i> <?= __('Back To Menu Groups'); ?></span>
+                        </a>
+                        <a id="btn-add" class="action action-primary" href="<?= $block->getUrl('rsmegamenu/item/new', []); ?>">
+                            <span><i class="fa fa-plus-circle"></i> <?= __('Add New Menu Item'); ?></span>
+                        </a>
+                        <a id="btn-import-categories" class="action action-secondary" href="javascript:void(0);" onclick="jQuery('#ub_import_categories_container').modal('openModal');">
+                            <span><i class="fa fa-download"></i> <?= __('Import Categories'); ?></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="cf nestable-lists">
+                    <div id="nestable" class="dd">
+                        <?php
+                            $items = $block->getMenuItems();
+                            if (sizeof($items)) {
+                                echo $block->buildTreeMenu(0, $items);
+                            } else {
+                                echo '<span class="no-item">'.__('There is not item yet.').'</span>';
+                            }
+                        ?>
+                    </div>
+                </div>
+                <textarea id="nestable-output" style="visibility: hidden;"></textarea>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'jquery/jquery.cookie',
+        'nestable',
+        'Magento_Ui/js/modal/confirm',
+        'Magento_Ui/js/modal/alert',
+        "domReady!"
+    ], function(jQuery, jQueryCookie, nestable, confirm, alert) {
+
+        (function($) {
+
+                //hide the loading mask
+                $("#menu-loading").hide();
+
+                var updateOutput = function(e) {
+                    var list   = e.length ? e : $(e.target),
+                        output = list.data('output');
+                    if (window.JSON) {
+                        output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                    } else {
+                        output.val('JSON browser support is required.');
+                    }
+                };
+
+                //activate Nestable for list menu items
+                $('#nestable').nestable({
+                    group: 1,
+                    maxDepth: 15
+                }).on('change', updateOutput);
+
+                //output initial serialised data
+                updateOutput($('#nestable').data('output', $('#nestable-output')));
+
+                //expand or collapse menu items tree
+                //$('.dd').nestable('collapseAll');
+                $('#nestable-menu').on('click', function(e) {
+                    var target = $(e.target),
+                        action = target.data('action');
+                    if (action === 'expand-all') {
+                        $('.dd').nestable('expandAll');
+                    }
+                    if (action === 'collapse-all') {
+                        $('.dd').nestable('collapseAll');
+                    }
+                });
+
+                //ajax save menu sort order
+                var oldDataString = $("#nestable-output").val();
+                $('.dd').on('change', function() {
+                    var newDataString = $("#nestable-output").val();
+                    if (newDataString != oldDataString) {
+                        //ajax request to save menu items data
+                        $.ajax({
+                            type: "POST",
+                            url: "<?= $block->getUrl('rsmegamenu/item/ajaxSortOrder', []); ?>",
+                            data: {menu_data: newDataString, form_key: window.FORM_KEY},
+                            cache : false,
+                            beforeSend: function () {
+                                $("#menu-loading").show();
+                            },
+                            success: function(data) {
+                                $("#menu-loading").hide();
+                                //update current data
+                                oldDataString = $("#nestable-output").val();
+                            }, error: function(xhr, status, error) {
+                                alert({title: <?= __('Error')?>, content: error});
+                            },
+                        });
+                    }
+                });
+
+                //ajax delete menu item
+                $(".rostilos-mega-menu-tree").on("click", ".del-button", function() {
+                    var id = $(this).data('id');
+                    confirm({
+                        content: '<?= __('All associated child menu items will be deleted too. Are you sure to delete this item?'); ?>',
+                        actions: {
+                            confirm: function () {
+                                //ajax request to delete menu item
+                                $.ajax({
+                                    type: "POST",
+                                    url: "<?= $block->getUrl('rsmegamenu/item/ajaxDelete', []); ?>",
+                                    data: { item_id : id, form_key: window.FORM_KEY},
+                                    cache : false,
+                                    beforeSend: function() {
+                                        $("#menu-loading").show();
+                                    },
+                                    success: function(rs) {
+                                        $("#menu-loading").hide();
+                                        if (rs.success) {
+                                            $("li[data-id='" + id +"']").remove();
+                                        } else {
+                                            $.mage.alert({title: rs.message});
+                                        }
+                                        //console.log(rs.message);
+                                    }, error: function(xhr, status, error) {
+                                        alert({title: <?= __('Error')?>, content: error});
+                                    },
+                                });
+                            }
+                        }
+                    });
+                });
+
+                //ajax change status of menu item
+                $(".rostilos-mega-menu-tree").on("click", ".change-status-button", function() {
+                    var $el = $(this);
+                    var id = $el.data('id');
+                    //ajax request to delete menu item
+                    $.ajax({
+                        type: "POST",
+                        url: "<?= $block->getUrl('rsmegamenu/item/ajaxChangeStatus', []); ?>",
+                        data: { item_id : id, form_key: window.FORM_KEY},
+                        cache : false,
+                        beforeSend: function() {
+                            $("#menu-loading").show();
+                        },
+                        success: function(rs) {
+                            $("#menu-loading").hide();
+                            if (rs.success) {
+                                if (rs.action == 'enabled') {
+                                    $el.html('<i class="fa fa-toggle-on"></i>');
+                                } else {
+                                    $el.html('<i class="fa fa-toggle-off"></i>');
+                                }
+                            }
+                        }, error: function(xhr, status, error) {
+                            alert({title: <?= __('Error')?>, content: error});
+                        },
+                    });
+                });
+
+                //redirect to change list menu items when change menu group
+                $('#menu_group_id').on('change', function() {
+                    var redirectUrl = $(this).val();
+                    if (redirectUrl.length) {
+                        window.location.href = redirectUrl;
+                    }
+                });
+
+                //redirect to edit page when click the menu  item row/ menu item title
+                $(".rostilos-mega-menu-tree").on("click", ".dd3-content", function(e) {
+                    var $btnEdit = $(this).find('.sub-actions').find('.edit-button');
+                    if ($(e.target).hasClass('dd3-content') || $(e.target).hasClass('menu-item-title')) {
+                        if ($btnEdit.length) {
+                            window.location.href = $btnEdit.attr('href');
+                        }
+                    }
+                });
+
+                $('[data-action="collapse-all"]').trigger('click');
+
+                //Update stored status of expand when back main menu from item menu
+
+                $.fn.nestableShow = function() {
+                    return this.each(function () {
+                        var $parents = $(this).parents();
+                        $parents.each(function (i) {
+                            var list = $(this).data("nestable");
+                            if (list) {
+                                $parents.slice(0, i).filter(list.options.itemNodeName).each(function() {
+                                    list.expandItem($(this));
+                                });
+                                return false;
+                            }
+                        });
+                    });
+                };
+
+                var urlBefore = document.referrer;
+                if (urlBefore.indexOf('rsmegamenu/group/index') !== -1 ) {
+                    $.cookie("activeMenuItemIds", null, { path: '/', secure: true });
+                }
+                var activeItemIds = $.cookie("activeMenuItemIds");
+
+                if (activeItemIds) {
+                    var arrItems = activeItemIds.split(",");
+                    for (var i=0 ; i <  arrItems.length ; i++) {
+                        $('li[data-id="'+arrItems[i]+'"]').nestableShow();
+                    }
+                }
+                $(".page-actions").click(function () {
+                    $.cookie("activeMenuItemIds", null,{ path: '/' });
+                })
+        })(jQuery);
+
+    });
+</script>
+
+

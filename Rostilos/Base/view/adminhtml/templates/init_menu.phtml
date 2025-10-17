@@ -1,0 +1,12 @@
+<?php
+?>
+<script type="text/javascript">
+    requirejs([ 'jquery' ], function ($) {
+            $(document).ready(function() {
+                //update URLs for help center menu items
+                $('.item-helpcenter .item-docs a').attr('href', 'https://www.rostilos.com/docs').attr('target', '_blank');
+                $('.item-helpcenter .item-support a').attr('href', 'https://www.rostilos.com/ask-question').attr('target', '_blank');
+                $('.item-helpcenter .item-marketplace a').attr('href', 'https://www.rostilos.com/magento-extensions-2-x').attr('target', '_blank');
+            });
+        });
+</script>

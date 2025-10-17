@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rostilos. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Rostilos_Base::menu"
+             sortOrder="9999"
+             module="Rostilos_Base"
+             title="Rostilos's Extensions"
+             resource="Rostilos_Base::settings" />
+
+        <add id="Rostilos_Base::helpcenter"
+             sortOrder="1"
+             title="Help Center" module="Rostilos_Base"
+             parent="Rostilos_Base::menu"
+             resource="Rostilos_Base::settings"
+        />
+            <add id="Rostilos_Base::docs"
+             sortOrder="1"
+             title="Rostilos Documentation" module="Rostilos_Base"
+             parent="Rostilos_Base::helpcenter"
+             resource="Rostilos_Base::settings"
+             action="adminhtml/system_config/edit/section/rostilos_base" />
+            <add id="Rostilos_Base::support"
+             sortOrder="2"
+             title="Rostilos Help Center" module="Rostilos_Base"
+             parent="Rostilos_Base::helpcenter"
+             resource="Rostilos_Base::settings"
+             action="adminhtml/system_config/edit/section/rostilos_base" />
+            <add id="Rostilos_Base::marketplace"
+             sortOrder="4"
+             title="Rostilos Marketplace" module="Rostilos_Base"
+             parent="Rostilos_Base::helpcenter"
+             resource="Rostilos_Base::settings"
+             action="adminhtml/system_config/edit/section/rostilos_base" />
+    </menu>
+</config>

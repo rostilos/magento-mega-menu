@@ -1,0 +1,47 @@
+.admin__menu #menu-rostilos-base-menu.level-0 > a:before {
+    content: '';
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    margin-right: 0px;
+    vertical-align: top;
+    background: url(../images/ub_32x32.png) no-repeat;
+	opacity: .5;
+}
+.admin__menu #menu-rostilos-base-menu.level-0._active._show a:before,
+.admin__menu #menu-rostilos-base-menu.level-0 > a:hover:before {
+	opacity: 1;
+}
+.module-name {
+    text-align: left;
+    font-size: 14px !important;
+    margin: 0px 0px 5px 0px;
+}
+.module-desc {
+    font-weight: normal;
+    font-size: 11px;
+    text-align: left;
+    display: block;
+    float: left;
+}
+#menu-rostilos-base-menu .submenu-title{
+    color: #ffffff;
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 4.2rem;
+    margin-left: 3rem;
+    margin-right: 5.8rem;
+    background: url('../images/rostilos.svg') top left no-repeat;
+    background-size: 100% 100%;
+    max-width: inherit;
+    text-indent: -999em;
+    height: auto;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: -2px;
+    width: 137px;
+}
+#menu-rostilos-base-menu .action-close._close{ 
+    top: 0px;
+}

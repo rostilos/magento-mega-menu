@@ -1,0 +1,17 @@
+<?php
+use Magento\Framework\View\Element\Template;
+use Rostilos\MenuDeviceGraphQl\ViewModel\Menu;
+
+/** @var Menu $viewModelMenu */
+/** @var Template $block */
+
+$viewModelMenu = $block->getViewModel();
+?>
+
+<div id="rostilos-mega-menu-mobile"></div>
+
+<div id="rostilos-mega-menu-desktop" style="display: none">
+    <?= $viewModelMenu->getMenuHtml('desktop') ?>
+</div>
+
+<div id="rostilos-mega-menu-tablet"></div>

@@ -1,0 +1,221 @@
+<?php
+/** @var Data $baseHelper */
+/** @var Menu $block */
+/** @var Escaper $escaper */
+
+use Magento\Framework\Escaper;
+use Rostilos\Base\Helper\Data;
+use Rostilos\MegaMenu\Block\Menu;
+
+$baseHelper = $this->helper('Rostilos\Base\Helper\Data');
+$offCanvasBreakpoint = $baseHelper->getConfigValue("rsmegamenu/general/offcanvas_breakpoint");
+if ($offCanvasBreakpoint === 'mobile') {
+    $offCanvasBreakpoint = 1300; //enable off-canvas menu in tablet portrait and mobile devices
+} else {
+    $offCanvasBreakpoint = 'all'; //enable off-canvas menu in all devices
+}
+
+$enableSticky = $baseHelper->getConfigValue("rsmegamenu/general/enable_sticky");
+?>
+<?= $menuHtml ?>
+
+<script>
+    window.menu = {};
+    const mobileBreakpointWidth = 1300;
+    const pageWrapper = document.querySelector('div.page-wrapper');
+    const desktopMenuSelector = 'rostilos-mega-menu-desktop';
+    const mobileMenuSelector = 'rostilos-mega-menu-mobile';
+    const tabletMenuSelector = 'rostilos-mega-menu-tablet';
+    const tabletMatch = window.matchMedia("(any-hover:none)");
+
+    let mobileBreakPoint = window.matchMedia(`(max-width: ${mobileBreakpointWidth}px)`);
+    mobileBreakPoint.addListener(handleDeviceChange);
+
+    function handleDeviceChange(e) {
+        const isMobile = e.matches;
+        const isTablet = tabletMatch.matches && !isMobile;
+        const isDesktop = !isMobile && !isTablet;
+
+        toggleDesktopVersion(isDesktop);
+        toggleMobileVersion(isMobile);
+        toggleTableVersion(isTablet);
+    }
+
+    function toggleMobileVersion(show) {
+        if (document.getElementById(mobileMenuSelector)) {
+            document.getElementById(mobileMenuSelector).style.display = show ? 'block' : 'none';
+            if (document.querySelector(`#${mobileMenuSelector} .drilldown`)) {
+                document.querySelector(`#${mobileMenuSelector} .drilldown`).style.overflow = show ? 'unset' : 'hidden';
+            }
+        }
+        if (show) {
+            pageWrapper.classList.add('nav-off-canvas');
+        }
+    }
+
+    function toggleDesktopVersion(show) {
+        const history = window.menu['mobile']?.options?.drillOptions?._history;
+        while (history?.length) {
+            menu['mobile']?._up();
+        }
+        if (document.getElementById(desktopMenuSelector)) {
+            document.getElementById(desktopMenuSelector).style.display = show ? 'block' : 'none';
+        }
+        if (show) {
+            document.querySelector('html').classList.remove('nav-open');
+            pageWrapper?.classList.remove('nav-off-canvas', 'nav-off-open');
+        }
+    }
+
+    function toggleTableVersion(show) {
+        if (!show) {
+            if (document.getElementById(tabletMenuSelector)) {
+                document.getElementById(tabletMenuSelector).style.display = 'none';
+            }
+        } else {
+            document.getElementById(tabletMenuSelector).style.display = 'block';
+            if (document.getElementById('#rostilos-mega-menu-1-tablet')) {
+                document.getElementById(tabletMenuSelector).style.display = 'block';
+            } else {
+                fetchMenuContent('tablet');
+            }
+
+        }
+    }
+
+    function fetchMenuContent(version) {
+        window.dispatchEvent(new CustomEvent("menu-loading", {detail: {loading: true}}));
+        sendGraphQlRequest(version);
+    }
+
+    // tablet version only
+    function sendGraphQlRequest(deviceType) {
+        if (menu[deviceType]) {
+            window.dispatchEvent(new CustomEvent("menu-loading", {detail: {loading: false}}));
+            return;
+        }
+        const variables = JSON.stringify({
+            menuKey: ["main-menu"],
+            deviceType: [`${deviceType}`]
+        });
+        const query = `<?= /** @noEscape */ $block->query(
+            'rostilos_mega_menu',
+            '
+                query {
+                    renderBlock(menu_key: "main-menu", device_type: %deviceType) {
+                      html
+                    }
+                }
+                '
+        ) ?>`.replace('%deviceType', deviceType);
+        const url = `${BASE_URL}graphql?${new URLSearchParams({query, variables})}`;
+
+        fetch(`${BASE_URL}graphql`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Store': '<?= $escaper->escapeHtmlAttr($block->getStoreCode()) ?>'
+            },
+            credentials: 'include',
+            body: JSON.stringify({query: query})
+        })
+            .then(data => data.json())
+            .catch(error => {
+                console.error('Error:', error);
+                window.dispatchEvent(new CustomEvent("menu-loading", {detail: {loading: false}}));
+            })
+            .then(data => {
+
+                if (!data?.data?.renderBlock?.html) {
+                    toggleTableVersion(false);
+                    toggleDesktopVersion(true);
+                    toggleMobileVersion(false);
+                    return;
+                }
+                document.querySelector(`#rostilos-mega-menu-${deviceType}`).innerHTML = data?.data?.renderBlock?.html;
+
+                window.menu[deviceType] = new ubMenu(
+                    document.getElementById(`rostilos-mega-menu-1-${deviceType}`),
+                    {
+                        "menuPosition": "<?= $escaper->escapeJs($config['menu_position']) ?>",
+                        "menuKey": "<?= $escaper->escapeJs($config['menu_key']) ?>",
+                        "isMainMenu": "<?= $escaper->escapeJs($config['is_main_menu']) ?>",
+                        "enableSticky": "<?= $escaper->escapeJs($enableSticky) ?>",
+                        "rootSelector": "#rostilos-mega-menu-<?= $escaper->escapeJs($config['menu_group_id']) ?>",
+                        "itemSelector": "li.mega",
+                        "offCanvasBreakpoint": "<?= $escaper->escapeJs($offCanvasBreakpoint) ?>",
+                        "menuType": "<?= $escaper->escapeJs($config['menu_type']) ?>",
+                        "mobileType": "<?= $escaper->escapeJs($config['mobile_type']) ?>",
+                        "extraClass": "<?= $escaper->escapeJs($config['addition_class']) ?>",
+                        "deviceType": deviceType, "rootSelector": `#rostilos-mega-menu-1-${deviceType}`
+                    }
+                );
+                window.dispatchEvent(new CustomEvent(`${deviceType}-menu-ready`));
+                window.dispatchEvent(new CustomEvent("menu-loading", {detail: {loading: false}}));
+            })
+    }
+
+    function initDTVersion() {
+        if (menu['desktop']) {
+            return;
+        }
+        menu['desktop'] = new ubMenu(
+            document.getElementById('rostilos-mega-menu-1-desktop'),
+            {
+                "menuPosition": "<?= $escaper->escapeJs($config['menu_position']) ?>",
+                "menuKey": "<?= $escaper->escapeJs($config['menu_key']) ?>",
+                "isMainMenu": "<?= $escaper->escapeJs($config['is_main_menu']) ?>",
+                "enableSticky": "<?= $escaper->escapeJs($enableSticky) ?>",
+                "rootSelector": "#rostilos-mega-menu-<?= $escaper->escapeJs($config['menu_group_id']) ?>",
+                "itemSelector": "li.mega",
+                "offCanvasBreakpoint": "<?= $escaper->escapeJs($offCanvasBreakpoint) ?>",
+                "menuType": "<?= $escaper->escapeJs($config['menu_type']) ?>",
+                "mobileType": "desktop",
+                "extraClass": "<?= $escaper->escapeJs($config['addition_class']) ?>"
+            }
+        )
+        toggleDesktopVersion(true);
+    }
+
+    function initMenuLoad() {
+        console.log('test');
+        // load mobile menu for tablets on res <= 1300
+        if (window.innerWidth <= 1300 && document?.getElementById('rostilos-mega-menu')?.dataset?.deviceType !== 'mobile') {
+            pageWrapper.classList.add('nav-off-canvas');
+            // load tablet menu in res > 1300 an there is no hover on device
+        } else if (window.innerWidth > 1300 && window.matchMedia("(any-hover:none)").matches) {
+            fetchMenuContent('tablet');
+            //  load desktop
+        } else if (window.innerWidth > 1300 && document?.getElementById('rostilos-mega-menu')?.dataset?.deviceType !== 'desktop') {
+            initDTVersion();
+            pageWrapper.classList.remove('nav-off-canvas');
+        }
+    }
+
+    let menuOpen = false;
+
+    window.addEventListener('load-mobile-menu', () => {
+        fetchMenuContent('mobile');
+
+        const onMenuReady = () => {
+            if (menuOpen) {
+                window.menu['mobile']._toggleOffCanvasMenu('close');
+                menuOpen = false;
+            } else {
+                window.menu['mobile']._toggleOffCanvasMenu('open');
+                menuOpen = true;
+            }
+            window.dispatchEvent(new CustomEvent("menu-loading", {detail: {loading: false}}));
+        };
+
+        window.addEventListener('mobile-menu-ready', onMenuReady);
+
+        if (window.menu && window.menu['mobile']) {
+            onMenuReady();
+        }
+
+    });
+
+    initMenuLoad();
+
+</script>

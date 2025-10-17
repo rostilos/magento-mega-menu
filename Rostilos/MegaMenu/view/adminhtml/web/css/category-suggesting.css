@@ -1,0 +1,202 @@
+/*style for categories suggesting*/
+.field-category_ids .category-select {
+    margin: 0 0 6px;
+    padding: 2px;
+    width: 100%;
+}
+
+.field-category_ids .mage-suggest-inner {
+    padding-right: 27px;
+}
+
+.field-category_ids .addon>button {
+    float: right;
+    margin-left: 2.127659574%;
+    width: 28.4%;
+}
+
+.field-category_ids .mage-suggest-search-label:after {
+    color: #b2b2b2;
+    content: '\e013';
+    /* unordered list icon */
+    font-family: 'MUI-Icons';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    -webkit-font-smoothing: antialiased;
+    speak: none;
+}
+
+.field-category_ids .category-select:after {
+    display: none;
+}
+
+.admin__scope-old .mage-suggest-search-label {
+    display: block;
+}
+
+.mage-suggest-search-label input {
+    border: none;
+}
+
+.mage-suggest-choices {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mage-suggest-choices>li {
+    display: inline-block;
+}
+
+.mage-suggest-search-field {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.mage-suggest-search-field input,
+.mage-suggest-search-field input:focus,
+.mage-suggest-search-field input:active {
+    border: 0 none;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 3px;
+    width: 100%;
+    box-shadow: none;
+}
+
+.mage-suggest-search-field input.mage-suggest-state-loading {
+    background: #fff url('images/spinner.gif') no-repeat 100%;
+    padding-right: 22px;
+    position: relative;
+    z-index: 1;
+}
+
+.admin__scope-old .mage-suggest-choice {
+    background: #cdecf6;
+    border: 1px solid #a7cedb;
+    cursor: default;
+    height: auto;
+    margin: 1px 2px 1px 0;
+    padding: 2px 22px 1px 9px;
+    position: relative;
+    vertical-align: top;
+    border-radius: 3px;
+    -webkit-transition: background .3s;
+    -moz-transition: background .3s;
+    transition: background .3s;
+}
+
+.mage-suggest-choice:hover {
+    background: #aae3f5;
+}
+
+.mage-suggest-choice-close {
+    bottom: 0;
+    color: #7b94a1;
+    cursor: pointer;
+    line-height: 16px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 20px;
+}
+
+.mage-suggest-choice-close:hover {
+    color: #000;
+}
+
+.mage-suggest-choice-close:before {
+    content: '\e07d';
+    /* close icon */
+    font-family: 'MUI-Icons';
+    font-size: 6px;
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    speak: none;
+}
+
+.mage-suggest-no-records {
+    display: inline-block;
+    padding: 10px;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+#item_category_id {
+    display: none;
+}
+
+.mage-suggest-search-field input,
+.mage-suggest-search-field input:focus,
+.mage-suggest-search-field input:active {
+    height: 30px;
+    line-height: 30px;
+}
+
+.field-category_id .category-select {
+    margin: 0 0 6px;
+    padding: 2px;
+    width: 67.999999997%;
+}
+
+.field-category_id .mage-suggest-inner {
+    padding-right: 27px;
+}
+
+.field-category_id .addon>button {
+    float: right;
+    margin-left: 2.127659574%;
+    width: 28.4%;
+}
+
+.field-category_id .mage-suggest-search-label:after,
+.mage-new-category-dialog .mage-suggest-search-label:after {
+    color: #b2b2b2;
+    content: '\e013';
+    /* unordered list icon */
+    font-family: 'MUI-Icons';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    -webkit-font-smoothing: antialiased;
+    speak: none;
+}
+
+.field-category_id .category-select:after {
+    display: none;
+}
+
+#frm-import-categories .mage-suggest.category-select .mage-suggest-dropdown {
+    max-height: 600px;
+}
+
+#import_categories_messages {
+    padding: 10px;
+    text-align: center;
+}
+
+#import_categories_messages.error {
+    color: #f00;
+}
+
+#import_categories_messages.success {
+    color: #10a54a;
+}
+
+#select_category_message.warning,
+#import_categories_messages.warning {
+    color: #eb5202;
+}

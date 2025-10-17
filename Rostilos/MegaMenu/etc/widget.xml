@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget
+        id="ub_megamenu"
+        class="Rostilos\MegaMenu\Block\Widget\MenuWidget"
+        is_email_compatible="false"
+        placeholder_image="Rostilos_MegaMenu::css/images/placeholder.gif">
+        <label translate="true">UB Mega Menu</label>
+        <description translate="true">List of Menu items in a widget</description>
+        <parameters>
+            <parameter name="menu_id" xsi:type="block" visible="true" required="true">
+                <label translate="true">Menu</label>
+                <block class="Rostilos\MegaMenu\Block\Adminhtml\Group\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select a Menu...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="show_menu_title" xsi:type="select" visible="true">
+                <label translate="true">Show Menu Group Title</label>
+                <options>
+                    <option name="yes" value="1"> <label translate="true">Yes</label> </option>
+                    <option name="no" value="0" selected="true"> <label translate="true">No</label> </option>
+                </options>
+            </parameter>
+            <parameter name="mega_content_visible_in" xsi:type="multiselect" visible="true" source_model="Rostilos\MegaMenu\Model\Config\Source\Devices">
+                <label translate="true">Display Mega Content On</label>
+                <description translate="true">Hold down the Command (or Ctrl) key and click to select device(s) you wish to show Mega contents (Description, Custom Content, Static Blocks).</description>
+            </parameter>
+            <parameter name="end_level" xsi:type="text" required="false" visible="true">
+                <label translate="true">Menu Level Limit</label>
+                <description translate="true">
+                    Specify the number of levels of menu items displayed in the storefront.
+                    Enter 1 to display 1st-level menu items, enter 2 to display 1st-level and 2nd-level menu items, enter 3 to display 1st-level, 2nd-level, and 3rd-level menu items, and so on.
+                    Default value is 10.
+                </description>
+                <value>10</value>
+            </parameter>
+            <parameter name="addition_class" xsi:type="text" required="false" visible="true">
+                <label translate="true">Extra Class</label>
+            </parameter>
+            <parameter name="is_mobile_menu" xsi:type="select" visible="false">
+                <label translate="true">Is Mobile Menu</label>
+                <options>
+                    <option name="no" value="0" selected="true"> <label translate="true">No</label> </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

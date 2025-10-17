@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Controller\Product\Compare\Add">
+        <plugin name="ub_ajax_add_to_compare_plugin" type="Rostilos\Base\Plugin\Controller\Product\Compare\Add"/>
+    </type>
+    <type name="Magento\Wishlist\Controller\Index\Add">
+        <plugin name="ub_ajax_add_to_wishlist_plugin" type="Rostilos\Base\Plugin\Controller\Wishlist\Index\Add"/>
+    </type>
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin name="ub_plugin_magento_framework_app_http_context" type="Rostilos\Base\Plugin\Magento\Framework\App\Http\Context"/>
+    </type>
+</config>

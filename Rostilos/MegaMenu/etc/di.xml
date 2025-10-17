@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rostilos.com All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Rostilos\MegaMenu\Api\Data\GroupSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Rostilos\MegaMenu\Api\Data\GroupInterface" type="Rostilos\MegaMenu\Model\Group" />
+    <preference for="Rostilos\MegaMenu\Api\GroupRepositoryInterface" type="Rostilos\MegaMenu\Model\GroupRepository" />
+    <preference for="Rostilos\MegaMenu\Api\Data\ItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Rostilos\MegaMenu\Api\Data\ItemInterface" type="Rostilos\MegaMenu\Model\Item" />
+    <preference for="Rostilos\MegaMenu\Api\ItemRepositoryInterface" type="Rostilos\MegaMenu\Model\ItemRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rsmegamenu_group_listing_data_source" xsi:type="string">Rostilos\MegaMenu\Model\ResourceModel\Group\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Rostilos\MegaMenu\Model\ResourceModel\Group\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">rsmegamenu_group</argument>
+            <argument name="eventPrefix" xsi:type="string">rsmegamenu_group_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">group_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Rostilos\MegaMenu\Model\ResourceModel\Group</argument>
+        </arguments>
+    </type>
+    <virtualType name="MegaMenuGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Rostilos\MegaMenu\Api\Data\GroupInterface" xsi:type="string">Rostilos\MegaMenu\Api\GroupRepositoryInterface</item>
+                <item name="Rostilos\MegaMenu\Api\Data\ItemInterface" xsi:type="string">Rostilos\MegaMenu\Api\ItemRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="GroupGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Rostilos\MegaMenu\Model\ResourceModel\Group\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MegaMenuGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Cms\Controller\Adminhtml\Page\MassDelete">
+        <plugin name="update_menu_item_when_delete_cmspage_massaction" type="Rostilos\MegaMenu\Plugin\Cms\Adminhtml\Page\MassDelete" sortOrder="10"  />
+    </type>
+</config>
