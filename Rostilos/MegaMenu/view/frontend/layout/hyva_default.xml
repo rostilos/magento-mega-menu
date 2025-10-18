@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Rostilos_MegaMenu::js/rs-menu-js.js"/>
+        <css src="Rostilos_MegaMenu/css/module.css" />
+    </head>
+    <body>
+        <referenceBlock name="header-content">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Rostilos_MegaMenu::hyva/header.phtml</argument>
+            </action>
+            <block name="main.rostilos.mega.menu"
+                   template="Rostilos_MegaMenu::menus.phtml"
+                   as="rs-topmenus">
+                <arguments>
+                    <argument xsi:type="object" name="view_model">Rostilos\MegaMenu\ViewModel\Menu</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Theme\Block\Html\Header\Logo" name="logo-burger" template="Rostilos_MegaMenu::header/logo-burger.phtml">
+                <arguments>
+                    <argument name="logoPathResolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoPathResolver</argument>
+                    <argument name="logo_size_resolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolver</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

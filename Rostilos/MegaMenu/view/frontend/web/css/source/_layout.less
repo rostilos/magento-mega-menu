@@ -1,10 +1,6 @@
 @media screen and (max-width: @screen__l) {
-
     .rs-mega-menu{
         &__logo{
-            position: absolute;
-            top: 0;
-            left: 0;
             padding: 0 24px;
             .logo{
                 margin: 0 0 12px;
@@ -21,8 +17,23 @@
             position: absolute;
             width: 100%;
         }
+
     }
 }
+
+@media screen and (min-width: @screen__l) {
+    .nav-toggle{
+        display: none;
+    }
+    .rs-mega-menu{
+        &__content {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            min-height: 40px;
+        }
+    }
+}
+
 
 header {
     position: relative;
