@@ -315,6 +315,12 @@ class ubMenu {
                 if (this.classList.contains('tab-head')) {
                     const tabHead = this.parentElement.closest('li.tab-head');
                     self._activeTab(tabHead);
+                    if(!self._isTablet()){
+                        tabHead.addEventListener('mouseleave', () => {
+                            self._deactiveTab(tabHead);
+                        })
+
+                    }
                 }
 
                 // get current status of menu item
@@ -428,6 +434,10 @@ class ubMenu {
         });
 
         this._resizeTab(tabHead);
+    }
+
+    _deactiveTab(tabHead) {
+        tabHead.classList.remove('active');
     }
 
     _resizeTab(tabHead) {

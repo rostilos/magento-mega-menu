@@ -7,6 +7,12 @@
     <body>
         <referenceContainer name="header.container">
             <block name="header-content" template="Rostilos_MegaMenu::header.phtml">
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="logo-burger" template="Rostilos_MegaMenu::header/logo-burger.phtml">
+                    <arguments>
+                        <argument name="logoPathResolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoPathResolver</argument>
+                        <argument name="logo_size_resolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolver</argument>
+                    </arguments>
+                </block>
                 <block name="main.rostilos.mega.menu"
                        template="Rostilos_MegaMenu::menus.phtml"
                        as="rs-topmenus">

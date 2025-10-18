@@ -72,12 +72,6 @@ ul.accordion-root {
             position: relative;
             padding: 14px 0;
             line-height: 1;
-
-            > .menu-icon {
-                left: 5%;
-                margin-left: 0;
-                top: -5px;
-            }
         }
 
         &.group {

@@ -238,7 +238,7 @@
                     > li.mega {
                         &.has-child {
                             .child-content {
-                                left: 270px;
+                                left: 300px;
                             }
                         }
                     }
@@ -517,16 +517,20 @@
 .mm-pink > a{
     background-color: #fc8eac !important;
 }
+
 .mm-orange > a{
       background-color: #fa8128 !important;
 }
+
 .mm-black > a{
     background-color: #4c4c4c !important;
     color: #fff000 !important;
 }
+
 .mm-red > a{
     background-color: #F70729 !important;
 }
+
 .mm-special-event > a {
     background-color: #000000 !important;
     color: #ffffff !important;
@@ -534,4 +538,26 @@
     &:hover {
         color: #FEDE1F !important;
     }
+}
+
+//Custom helper classes
+@media screen and (min-width: @screen__l) {
+    .left-sidebar {
+        padding-right: 16px;
+        &:after{
+            position: absolute;
+            right: 16px;
+            content: '';
+            display: block;
+            width: 1px;
+            height: 100%;
+            background: @border-color__base;
+        }
+    }
+
+    .label-heading {
+        text-transform: uppercase;
+        font-weight: 700 !important;
+    }
+
 }

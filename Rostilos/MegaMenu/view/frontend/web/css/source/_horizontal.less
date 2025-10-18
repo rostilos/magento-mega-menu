@@ -20,6 +20,23 @@
 }
 
 @media screen and (min-width: @screen__l) {
+    ul.level0 > li:not(.mega-hover) > * {
+        pointer-events: none;
+    }
+
+    a.tab-head {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        &:after{
+            display: block;
+            margin-right: -16px;
+            width: 16px;
+            height: 16px;
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 25 25'%3E%3Cpath style='fill:%23232326' d='m17.5 5.999-.707.707 5.293 5.293H1v1h21.086l-5.294 5.295.707.707L24 12.499l-6.5-6.5z' data-name='Right'/%3E%3C/svg%3E");
+        }
+    }
     .nav-sections {
         max-height: 51px;
 
@@ -66,12 +83,6 @@
                     padding: 0 20px;
                     line-height: 50px;
                     position: relative;
-
-                    span.menu-icon {
-                        left: 50%;
-                        margin-left: -16px;
-                        top: -10px;
-                    }
                 }
 
                 &.has-child {
@@ -133,12 +144,6 @@
                 &:hover {
                     background: none;
                     text-decoration: none;
-                }
-
-                span.menu-icon {
-                    left: 50%;
-                    margin-left: -16px;
-                    top: -10px;
                 }
 
                 &.active {
@@ -731,19 +736,6 @@
                                         padding-bottom: 10px !important;
                                         padding: 0;
 
-                                        span.menu-icon {
-                                            float: left;
-                                            height: 32px;
-                                            line-height: 32px;
-                                            margin: 0 10px 0 0;
-                                            position: static;
-
-                                            img {
-                                                border: 2px solid @border-color__base;
-                                                border-radius: 100%;
-                                            }
-                                        }
-
                                         span.menu-title {
                                             border-bottom: 0 !important;
                                             color: inherit !important;
@@ -799,26 +791,6 @@
                             position: relative;
                             text-align: center;
                             transition: all 0.4s linear;
-
-                            span.menu-icon {
-                                border-radius: 50%;
-                                border: 2px solid transparent;
-                                display: block;
-                                height: 80px;
-                                left: 0;
-                                margin-left: 0;
-                                margin: auto;
-                                max-width: 80px;
-                                position: static;
-                                top: 0;
-                                width: 100%;
-                            }
-
-                            &:hover {
-                                span.menu-icon {
-                                    border-color: @secondary__color;
-                                }
-                            }
                         }
 
                         &.has-child {
@@ -1016,11 +988,21 @@
 }
 
 @media screen and (min-width: @screen__l) and (max-width: @screen__xl){
-    .level0.horizontal-root > li.mega.style-tabs.child-without-left-sidebar .child-content .child-content-inner ul.level2 > li.mega.has-child .child-content{
-        max-width: 45%;
-        box-sizing: content-box;
+    .level0.horizontal-root > li.mega.style-tabs.child-without-left-sidebar .child-content .child-content-inner ul.level2 {
+        & > li.mega {
+            width: 100%;
+            a {
+                width: 100%;
+            }
+        }
+        & > li.mega.has-child .child-content{
+            max-width: 45%;
+            box-sizing: content-box;
+        }
+
     }
 }
+
 @media screen and (min-width: 1200px) {
     ul.level0.horizontal-root {
         > li.mega {

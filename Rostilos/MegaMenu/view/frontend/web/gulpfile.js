@@ -6,8 +6,8 @@ var gulpautoprefixer = require('gulp-autoprefixer');
 //Creating a Style task that convert LESS to CSS
 
 gulp.task('styles', function () {
-    var srcfile = './web/css/source/module.less';
-    var dest = './web/css';
+    var srcfile = './css/source/module.less';
+    var dest = './css';
     return gulp
         .src(srcfile)
         .pipe(gulpsourcemaps.init())

@@ -5,6 +5,14 @@
     width: 100%;
 }
 
+li.mega {
+    span.menu-icon {
+        height: 20px !important;
+        width: 32px !important;
+        display: inline-block;
+    }
+}
+
 ul.level0[data-device-type="tablet"] > li.mega.has-child{
     @media screen and (min-width: @screen__l){
         a.mega.has-child{
@@ -280,7 +288,7 @@ ul.level0 {
     opacity: 0;
     > li.mega {
         .mega {
-            color: #fff;
+            color: @color-text-main;
             font-weight: @font-weight__regular;
         }
     }
@@ -313,15 +321,6 @@ ul.level0 {
 
                 i {
                     margin-right: 5px;
-                }
-
-                span.menu-icon {
-                    height: 20px;
-                    left: 10%;
-                    margin-left: -16px;
-                    position: absolute;
-                    top: -10px;
-                    width: 32px;
                 }
 
                 &.ui-state-active,
@@ -402,16 +401,6 @@ ul.level0 {
                 i {
                     margin-right: 5px;
                 }
-
-                span.menu-icon {
-                    height: 20px;
-                    left: 10%;
-                    margin-left: -16px;
-                    position: absolute;
-                    top: -10px;
-                    width: 32px;
-                }
-
                 &.ui-state-active,
                 &:active,
                 &:focus,
@@ -471,15 +460,6 @@ ul.level0 {
 
                 i {
                     margin-right: 5px;
-                }
-
-                span.menu-icon {
-                    height: 20px;
-                    left: 10%;
-                    margin-left: -16px;
-                    position: absolute;
-                    top: -10px;
-                    width: 32px;
                 }
 
                 &.ui-state-active,
@@ -543,15 +523,6 @@ ul.level0 {
                     margin-right: 5px;
                 }
 
-                span.menu-icon {
-                    height: 20px;
-                    left: 10%;
-                    margin-left: -16px;
-                    position: absolute;
-                    top: -10px;
-                    width: 32px;
-                }
-
                 &.ui-state-active,
                 &:active,
                 &:focus,
@@ -611,15 +582,6 @@ ul.level0 {
 
                 i {
                     margin-right: 5px;
-                }
-
-                span.menu-icon {
-                    height: 20px;
-                    left: 10%;
-                    margin-left: -16px;
-                    position: absolute;
-                    top: -10px;
-                    width: 32px;
                 }
 
                 &.ui-state-active,
@@ -682,16 +644,6 @@ ul.level0 {
                 i {
                     margin-right: 5px;
                 }
-
-                span.menu-icon {
-                    height: 20px;
-                    left: 10%;
-                    margin-left: -16px;
-                    position: absolute;
-                    top: -10px;
-                    width: 32px;
-                }
-
                 &.ui-state-active,
                 &:active,
                 &:focus,
@@ -734,7 +686,7 @@ ul.level0 {
         position: relative;
 
         > .mega {
-            color: @color-white;
+            color: @color-text-main;
             display: block;
             font-weight: @font-weight__semibold;
             text-transform: capitalize;
@@ -762,12 +714,6 @@ ul.level0 {
 
             i {
                 margin-right: 5px;
-            }
-
-            span.menu-icon {
-                height: 20px;
-                position: absolute;
-                width: 32px;
             }
 
             &.ui-state-active,
@@ -1190,15 +1136,6 @@ ul.level0 {
                             }
                         }
 
-                        li.mega {
-                            .mega {
-                                span.menu-icon {
-                                    margin-left: 0;
-                                    position: static;
-                                }
-                            }
-                        }
-
                         li.mega .group-title > .menu-desc img {
                             max-width: 700px;
                         }
@@ -1385,114 +1322,3 @@ ul.level0 {
         }
     }
 }
-
-//Style for Tab-Style Horizontal
-.women-brands {
-    margin-bottom: @indent__xl;
-    width: 100%;
-
-    ul {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        justify-content: space-between;
-
-        li {
-            margin: 0;
-            text-align: center;
-
-            img {
-                max-width: 120px;
-            }
-
-            span {
-                clear: both;
-                color: @color-black;
-                display: block;
-                font-weight: @font-weight__bold;
-                text-transform: uppercase;
-                width: 100%;
-            }
-        }
-    }
-}
-
-.men-collections {
-    div {
-        display: flex;
-        margin-bottom: @indent__m;
-        position: relative;
-
-        &:first-child {
-            margin-top: 13px;
-        }
-
-        span {
-            color: @color-white;
-            font-size: @font-size__base * 1.15;
-            font-weight: 400;
-            left: 50%;
-            position: absolute;
-            text-transform: uppercase;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        a {
-            display: flex;
-
-            &:hover {
-                span {
-                    text-decoration: underline;
-                }
-            }
-        }
-
-        &:before {
-            background: rgba(0, 0, 0, 0.5);
-            content: '';
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
-    }
-}
-
-.kids-collections {
-    display: flex;
-    margin: 0 -10px;
-    flex-wrap: wrap;
-    align-content: flex-start;
-
-    .item {
-        margin-bottom: @indent__l;
-        text-align: center;
-        width: 25%;
-
-        a {
-            color: @color-black;
-            display: block;
-            padding: 0 10px;
-
-            &:hover {
-                color: @active__color;
-                text-decoration: none;
-            }
-        }
-
-        span {
-            clear: both;
-            display: block;
-            font-size: @font-size__base;
-            font-weight: 600;
-            line-height: 1.25;
-            text-transform: uppercase;
-        }
-    }
-}
-

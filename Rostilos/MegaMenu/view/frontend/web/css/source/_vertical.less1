@@ -116,12 +116,6 @@ ul.vertical-root {
                 padding: 0 40px 0 0;
             }
 
-            span.menu-icon {
-                left: 5%;
-                top: -10px;
-                margin-left: 0;
-            }
-
             &.ui-state-active,
             &:active,
             &:focus,
@@ -331,11 +325,6 @@ ul.vertical-root {
             > li.mega {
                 > .mega {
                     text-align: right;
-
-                    span.menu-icon {
-                        left: auto;
-                        right: 0;
-                    }
                 }
             }
         }

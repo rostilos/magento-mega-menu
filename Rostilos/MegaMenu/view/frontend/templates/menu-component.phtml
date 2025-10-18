@@ -64,6 +64,7 @@ $enableSticky = $baseHelper->getConfigValue("rsmegamenu/general/enable_sticky");
         if (show) {
             document.querySelector('html').classList.remove('nav-open');
             pageWrapper?.classList.remove('nav-off-canvas', 'nav-off-open');
+            initDTVersion();
         }
     }
 
