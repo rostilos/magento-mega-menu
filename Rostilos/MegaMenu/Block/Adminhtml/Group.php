@@ -1,12 +1,6 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml;
 
-/**
- * Adminhtml UB Mega Menu Groups content block
- */
 class Group extends \Magento\Backend\Block\Widget\Grid\Container
 {
     /**

@@ -1,16 +1,8 @@
 <?php
-/**
- * Copyright © 2018 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Plugin\Cms\Adminhtml\Page;
 
 class MassDelete extends \Magento\Cms\Controller\Adminhtml\Page\MassDelete
 {
-    /**
-     * @param \Magento\Cms\Controller\Adminhtml\Page\MassDelete $subject
-     * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
     public function beforeExecute(\Magento\Cms\Controller\Adminhtml\Page\MassDelete $subject)
     {
         $om = \Magento\Framework\App\ObjectManager::getInstance();

@@ -1,15 +1,9 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml\Item\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;
 
-/**
- * Menu item edit form MegaSetting tab
- */
 class MegaSetting extends Generic implements TabInterface
 {
     /**

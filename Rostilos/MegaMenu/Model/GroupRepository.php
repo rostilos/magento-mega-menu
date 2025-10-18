@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model;
 
 use Magento\Framework\Api\DataObjectHelper;
@@ -17,10 +14,6 @@ use Rostilos\MegaMenu\Api\Data;
 use Rostilos\MegaMenu\Model\GroupFactory;
 use Rostilos\MegaMenu\Model\ResourceModel\Group\CollectionFactory as GroupCollectionFactory;
 
-/**
- * Class GroupRepository
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class GroupRepository implements GroupRepositoryInterface
 {
     /**

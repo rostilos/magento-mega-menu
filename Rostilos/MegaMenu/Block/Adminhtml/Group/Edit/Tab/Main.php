@@ -1,49 +1,31 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml\Group\Edit\Tab;
+use Magento\Backend\Block\Template\Context;
+use Magento\Backend\Block\Widget\Form\Generic;
+use Magento\Backend\Block\Widget\Tab\TabInterface;
+use Magento\CatalogRule\Model\Rule\CustomerGroupsOptionsProvider;
+use Magento\Framework\Data\FormFactory;
+use Magento\Framework\Registry;
+use Magento\Store\Model\System\Store;
 
-/**
- * UB Mega Menu Group edit form main tab
- */
-class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magento\Backend\Block\Widget\Tab\TabInterface
+class Main extends Generic implements TabInterface
 {
-    /**
-     * @var \Magento\Store\Model\System\Store
-     */
-    protected $_systemStore;
+    protected Store $systemStore;
+    protected CustomerGroupsOptionsProvider $customerGroups;
 
-    /**
-     * @var \Magento\CatalogRule\Model\Rule\CustomerGroupsOptionsProvider
-     */
-    protected $customerGroups;
-
-    /**
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param \Magento\Store\Model\System\Store $systemStore
-     * @param array $data
-     */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Store\Model\System\Store $systemStore,
-        \Magento\CatalogRule\Model\Rule\CustomerGroupsOptionsProvider $customerGroups,
+        Context $context,
+        Registry $registry,
+        FormFactory $formFactory,
+        Store $systemStore,
+        CustomerGroupsOptionsProvider $customerGroups,
         array $data = []
     ) {
-        $this->_systemStore = $systemStore;
+        $this->systemStore = $systemStore;
         $this->customerGroups = $customerGroups;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
-    /**
-     * @return \Magento\Backend\Block\Widget\Form\Generic
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
     protected function _prepareForm()
     {
         /* @var $model \Rostilos\MegaMenu\Model\Group */
@@ -69,7 +51,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
             $fieldset->addField('group_id', 'hidden', ['name' => 'group_id']);
         }
 
-        $note = __('Depending on the system configuration (UB Mega Menu > General Settings > Display Off-canvas From) you set, available positions will show up here.');
+        $note = __('Depending on the system configuration (Rostilos Mega Menu > General Settings > Display Off-canvas From) you set, available positions will show up here.');
         $note .= __(' More details <a href="//www.rostilos.com/docs/rostilos-mega-menu/#default" target="_blank" rel="nofollow">here</a>');
         $fieldset->addField(
             'menu_position',
@@ -183,7 +165,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                     'label' => __('Store View'),
                     'title' => __('Store View'),
                     'required' => true,
-                    'values' => $this->_systemStore->getStoreValuesForForm(false, true),
+                    'values' => $this->systemStore->getStoreValuesForForm(false, true),
                     'disabled' => $isElementDisabled
                 ]
             );
@@ -239,48 +221,26 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         return parent::_prepareForm();
     }
 
-    /**
-     * Prepare label for tab
-     *
-     * @return \Magento\Framework\Phrase
-     */
     public function getTabLabel()
     {
         return __('Basic Information');
     }
 
-    /**
-     * Prepare title for tab
-     *
-     * @return \Magento\Framework\Phrase
-     */
     public function getTabTitle()
     {
         return __('Basic Information');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function canShowTab()
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isHidden()
     {
         return false;
     }
 
-    /**
-     * Check permission for passed action
-     *
-     * @param string $resourceId
-     * @return bool
-     */
     protected function _isAllowedAction($resourceId)
     {
         return $this->_authorization->isAllowed($resourceId);

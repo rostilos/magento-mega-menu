@@ -1,14 +1,6 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model\ResourceModel\Group;
 
-/**
- * UB Menu Menu Group collection
- *
- * Class Collection
- */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**

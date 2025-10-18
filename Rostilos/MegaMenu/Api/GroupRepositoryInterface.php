@@ -1,9 +1,11 @@
 <?php
 namespace Rostilos\MegaMenu\Api;
 
+use Rostilos\MegaMenu\Api\Data\GroupInterface;
+
 interface GroupRepositoryInterface
 {
-    public function save(\Rostilos\MegaMenu\Api\Data\GroupInterface $group);
+    public function save(GroupInterface $group);
 
     public function getById($groupId);
 
@@ -11,7 +13,7 @@ interface GroupRepositoryInterface
 
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
-    public function delete(\Rostilos\MegaMenu\Api\Data\GroupInterface $group);
+    public function delete(GroupInterface $group);
 
     public function deleteById($groupId);
 }

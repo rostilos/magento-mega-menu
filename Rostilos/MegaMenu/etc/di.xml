@@ -1,9 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Rostilos\MegaMenu\Api\Data\GroupSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
     <preference for="Rostilos\MegaMenu\Api\Data\GroupInterface" type="Rostilos\MegaMenu\Model\Group" />

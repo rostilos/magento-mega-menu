@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Ui\Component\Listing\Columns;
 
 use Magento\Framework\UrlInterface;
@@ -9,9 +6,6 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class Menu Group Actions
- */
 class GroupActions extends Column
 {
     /** Url path */

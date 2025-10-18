@@ -1,9 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="rostilos" translate="label" sortOrder="999">
@@ -11,7 +6,7 @@
         </tab>
         <section id="rsmegamenu" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>UB Mega Menu</label>
+            <label>Rostilos Mega Menu</label>
             <tab>rostilos</tab>
             <resource>Rostilos_MegaMenu::settings</resource>
             <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">

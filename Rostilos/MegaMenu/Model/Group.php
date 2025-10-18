@@ -1,18 +1,9 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model;
 
 use Magento\Framework\DataObject\IdentityInterface;
 use Rostilos\MegaMenu\Api\Data\GroupInterface;
 
-/**
- * UB Mega Menu Group Model
- *
- * @method \Rostilos\MegaMenu\Model\ResourceModel\Group _getResource()
- * @method \Rostilos\MegaMenu\Model\ResourceModel\Group getResource()
- */
 class Group extends \Magento\Framework\Model\AbstractModel implements GroupInterface, IdentityInterface
 {
     /**#@+
@@ -34,11 +25,6 @@ class Group extends \Magento\Framework\Model\AbstractModel implements GroupInter
 
     const OFF_CANVAS_BREAKPOINT_PATH = 'rsmegamenu/general/offcanvas_breakpoint';
 
-    /**#@-*/
-
-    /**
-     * UB Mega Menu Group cache tag
-     */
     const CACHE_TAG = 'rsmegamenu_group';
 
     /**

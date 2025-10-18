@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Controller\Adminhtml\Group;
 
 use Magento\Backend\App\Action;

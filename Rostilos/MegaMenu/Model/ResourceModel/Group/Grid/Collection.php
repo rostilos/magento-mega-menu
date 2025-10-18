@@ -1,17 +1,10 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model\ResourceModel\Group\Grid;
 
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Search\AggregationInterface;
 use Rostilos\MegaMenu\Model\ResourceModel\Group\Collection as GroupCollection;
 
-/**
- * Class Collection
- * Collection for displaying grid of menu groups
- */
 class Collection extends GroupCollection implements SearchResultInterface
 {
     /**

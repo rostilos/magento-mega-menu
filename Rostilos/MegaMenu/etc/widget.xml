@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
     <widget
-        id="ub_megamenu"
+        id="rs_megamenu"
         class="Rostilos\MegaMenu\Block\Widget\MenuWidget"
         is_email_compatible="false"
         placeholder_image="Rostilos_MegaMenu::css/images/placeholder.gif">
-        <label translate="true">UB Mega Menu</label>
+        <label translate="true">Rostilos Mega Menu</label>
         <description translate="true">List of Menu items in a widget</description>
         <parameters>
             <parameter name="menu_id" xsi:type="block" visible="true" required="true">

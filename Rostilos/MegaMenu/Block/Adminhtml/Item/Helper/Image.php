@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml\Item\Helper;
 
 use Magento\Framework\Data\Form\Element\CollectionFactory as ElementCollectionFactory;
@@ -11,10 +8,6 @@ use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;
 use Rostilos\MegaMenu\Model\Item\Image as ImageModel;
 
-/**
- * Class Image
- * @package Rostilos\MegaMenu\Block\Adminhtml\Item\Helper
- */
 class Image extends ImageField
 {
     /**

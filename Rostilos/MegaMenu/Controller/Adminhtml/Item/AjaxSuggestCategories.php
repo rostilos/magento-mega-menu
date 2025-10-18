@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2015 Magento. All rights reserved.
- */
 namespace Rostilos\MegaMenu\Controller\Adminhtml\Item;
 
 class AjaxSuggestCategories extends \Magento\Catalog\Controller\Adminhtml\Category

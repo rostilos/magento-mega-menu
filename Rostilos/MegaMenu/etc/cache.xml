@@ -1,12 +1,7 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
     <type name="rsmegamenu" translate="label,description" instance="Rostilos\MegaMenu\Model\Cache\Type">
-        <label><![CDATA[UB MegaMenu]]></label>
+        <label><![CDATA[Rostilos MegaMenu]]></label>
         <description><![CDATA[Menu data cache]]></description>
     </type>
 </config>

@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model\Item;
 
 use Magento\Framework\App\Filesystem\DirectoryList;

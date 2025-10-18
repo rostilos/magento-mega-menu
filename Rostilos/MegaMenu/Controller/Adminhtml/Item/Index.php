@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Controller\Adminhtml\Item;
 
 use Magento\Backend\App\Action\Context;
@@ -62,7 +59,7 @@ class Index extends \Magento\Backend\App\Action
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Rostilos_MegaMenu::group');
-        $resultPage->addBreadcrumb(__('UB Mega Menu'), __('UB Mega Menu'));
+        $resultPage->addBreadcrumb(__('Rostilos Mega Menu'), __('Rostilos Mega Menu'));
         $resultPage->addBreadcrumb(__('Manage Menu Items'), __('Manage Menu Items'));
         $resultPage->getConfig()->getTitle()->prepend(__('Manage Menu Items of Menu: %1', $title));
 

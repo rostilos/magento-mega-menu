@@ -1,10 +1,5 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
-
     /** @var \Rostilos\MegaMenu\Model\Group $menuGroup */
-    //get current menu group id
     $om = \Magento\Framework\App\ObjectManager::getInstance();
     $groupId = (int)$om->get('Magento\Backend\Model\Session')->getMenuGroupId();
     $groupId = (int)$om->get('\Magento\Backend\App\Action\Context')->getRequest()->getParam('group_id', $groupId);

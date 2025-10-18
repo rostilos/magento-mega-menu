@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos. All rights reserved.
- */
 declare(strict_types=1);
 
 namespace Rostilos\MegaMenu\Model\Resolver;

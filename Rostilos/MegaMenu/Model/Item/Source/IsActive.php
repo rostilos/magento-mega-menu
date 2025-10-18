@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model\Item\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;

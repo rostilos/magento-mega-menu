@@ -1,12 +1,6 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model\ResourceModel;
 
-/**
- * UB Mega Menu Group mysql resource
- */
 class Group extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**

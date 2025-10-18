@@ -1,18 +1,9 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Model;
 
 use Magento\Framework\DataObject\IdentityInterface;
 use Rostilos\MegaMenu\Api\Data\ItemInterface;
 
-/**
- * UB Mega Menu Item Model
- *
- * @method \Rostilos\MegaMenu\Model\ResourceModel\Item _getResource()
- * @method \Rostilos\MegaMenu\Model\ResourceModel\Item getResource()
- */
 class Item extends \Magento\Framework\Model\AbstractModel implements ItemInterface, IdentityInterface
 {
     /**#@+

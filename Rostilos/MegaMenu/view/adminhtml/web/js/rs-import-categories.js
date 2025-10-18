@@ -1,6 +1,3 @@
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 (function (factory) {
     if (typeof define === "function" && define.amd) {
         define([
@@ -17,7 +14,7 @@
 }(function ($) {
     "use strict";
 
-    $.widget('ub.UBImportCategories', {
+    $.widget('rs.RSImportCategories', {
         options: {
             suggestOptions: [],
         },
@@ -166,5 +163,5 @@
 
     });
 
-    return $.ub.UBImportCategories;
+    return $.rs.RSImportCategories;
 }));

@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
-
 namespace Rostilos\Base\Model;
 
 use Magento\MediaStorage\Model\File\UploaderFactory;
@@ -11,38 +7,18 @@ use Magento\Framework\File\Uploader;
 
 class Upload
 {
-    /**
-     * uploader factory object
-     *
-     * @var \Magento\MediaStorage\Model\File\UploaderFactory
-     */
-    protected $uploaderFactory;
+    protected UploaderFactory $uploaderFactory;
 
-    /**
-     * constructor
-     *
-     * @param UploaderFactory $uploaderFactory
-     */
     public function __construct(UploaderFactory $uploaderFactory)
     {
         $this->uploaderFactory = $uploaderFactory;
     }
 
-    /**
-     * upload file function
-     *
-     * @param $input
-     * @param $destinationFolder
-     * @param $data
-     * @return string file name
-     * @throws LocalizedException
-     */
     public function processUpload($fileId, $destinationFolder, $data, $allowedExts = [])
     {
         $fileName = '';
         try {
             if (isset($data[$fileId]['delete']) && $data[$fileId]['delete']) {
-                //delete file
                 $imagePath = $destinationFolder . $data[$fileId]['value'];
                 if (file_exists($imagePath)) {
                     unlink($imagePath);

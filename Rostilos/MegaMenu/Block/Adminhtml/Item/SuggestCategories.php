@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml\Item;
 
 class SuggestCategories extends \Magento\Catalog\Block\Adminhtml\Category\Tree

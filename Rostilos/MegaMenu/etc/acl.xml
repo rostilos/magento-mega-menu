@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Rostilos_Base::content">
-                    <resource id="Rostilos_MegaMenu::rsmegamenu_content" title="UB Mega Menu" sortOrder="11" >
+                    <resource id="Rostilos_MegaMenu::rsmegamenu_content" title="Rostilos Mega Menu" sortOrder="11" >
                         <resource id="Rostilos_MegaMenu::group" title="Manage Menu" sortOrder="1">
                             <resource id="Rostilos_MegaMenu::group_save" title="Save Menu" sortOrder="1" />
                             <resource id="Rostilos_MegaMenu::group_delete" title="Delete Menu" sortOrder="2" />
@@ -25,8 +20,7 @@
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
                             <resource id="Rostilos_Base::settings">
-                                <!-- this resource id we can use in system.xml for section -->
-                                <resource id="Rostilos_MegaMenu::settings" title="UB MegaMenu Section" sortOrder="2" />
+                                <resource id="Rostilos_MegaMenu::settings" title="Rostilos MegaMenu Section" sortOrder="2" />
                             </resource>
                         </resource>
                     </resource>

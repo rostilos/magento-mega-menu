@@ -1,21 +1,16 @@
-<?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
-?>
 <div id="<?= $block->getNameInLayout() ?>" style="display:none;">
     <?= $block->getFormHtml();?>
 </div>
 <script type="text/javascript">
     require([
         'jquery',
-        'ubImportCategories',
+        'rsImportCategories',
         'domReady!'
     ], function($) {
         'use strict';
 
         //apply import categories widget
-        $('#<?= $block->getNameInLayout() ?>').UBImportCategories(<?= $block->getWidgetOptions(); ?>);
+        $('#<?= $block->getNameInLayout() ?>').RSImportCategories(<?= $block->getWidgetOptions(); ?>);
 
         //ajax events on import form
         $('#import_type').on('change', function() {

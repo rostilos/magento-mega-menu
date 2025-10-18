@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml;
 
 use Rostilos\MegaMenu\Model\Item\Image as ImageModel;

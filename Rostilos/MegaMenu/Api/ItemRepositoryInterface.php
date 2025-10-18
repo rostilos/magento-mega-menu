@@ -1,15 +1,18 @@
 <?php
 namespace Rostilos\MegaMenu\Api;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Rostilos\MegaMenu\Api\Data\ItemInterface;
+
 interface ItemRepositoryInterface
 {
-    public function save(\Rostilos\MegaMenu\Api\Data\ItemInterface $item);
+    public function save(ItemInterface $item);
 
     public function getById($itemId);
 
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+    public function getList(SearchCriteriaInterface $searchCriteria);
 
-    public function delete(\Rostilos\MegaMenu\Api\Data\ItemInterface $item);
+    public function delete(ItemInterface $item);
 
     public function deleteById($itemId);
 }

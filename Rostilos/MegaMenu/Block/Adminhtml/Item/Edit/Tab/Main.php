@@ -1,13 +1,6 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
-
 namespace Rostilos\MegaMenu\Block\Adminhtml\Item\Edit\Tab;
 
-/**
- * Menu item edit form main tab
- */
 class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magento\Backend\Block\Widget\Tab\TabInterface
 {
     /**

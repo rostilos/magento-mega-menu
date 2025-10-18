@@ -1,14 +1,8 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Ui\Component\Listing\Columns\Store;
 
 use Magento\Store\Ui\Component\Listing\Column\Store\Options as StoreOptions;
 
-/**
- * Store Options for Menu Group
- */
 class Options extends StoreOptions
 {
     /**

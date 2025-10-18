@@ -1,12 +1,6 @@
 <?php
-/**
- * Copyright © 2016 Rostilos.com All rights reserved.
- */
 namespace Rostilos\MegaMenu\Block\Adminhtml\Item;
 
-/**
- * Admin menu item
- */
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {
     /**
