@@ -15,9 +15,7 @@ use Magento\Framework\View\Element\Template;
 >
     <div class="container rs-mega-menu">
         <!--Main Navigation-->
-        <div class="relative sections nav-sections min-h-[50px] text-black
-                    transition-all bg-geGreen-medium font-montserrat">
-            <span class="absolute left-sub width-sub top-0 bg-geGreen-medium h-full"></span>
+        <div class="rs-mega-menu__wrapper  sections nav-sections ">
             <div class="off-canvas-menu-img rs-mega-menu__logo">
                 <?= $block->getChildHtml('logo-burger'); ?>
             </div>
@@ -27,8 +25,7 @@ use Magento\Framework\View\Element\Template;
                 <?= $block->getChildHtml('rs-topmenus') ?>
             </div>
 
-            <span class="absolute right-sub width-sub top-0 bg-geGreen-medium h-full"></span>
-            <div x-show="isLoading" class="loader absolute w-full md-ge-menu:w-screen md-ge-menu:h-[50px]">
+            <div x-show="isLoading" class="rs-mega-menu__loader loader">
                 <?= $block->getChildHtml('loader') ?>
             </div>
         </div>
