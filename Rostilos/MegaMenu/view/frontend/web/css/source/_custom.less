@@ -35,12 +35,12 @@
     &:focus,
     &:hover,
     &.active {
-        color: @green-main !important;
+        color: @text-color-secondary !important;
         background: none !important;
     }
 
     &.mega {
-        color: @green-main !important;
+        color: @text-color-secondary !important;
     }
 }
 
@@ -54,11 +54,6 @@
         &.child-with-left-sidebar, &.child-without-left-sidebar > {
             ul.level1.drilldown-sub {
                 height: 100% !important;
-            }
-
-            div.child-content {
-                background: transparent;
-                box-shadow: none !important;
             }
         }
     }
@@ -106,12 +101,6 @@
                 .mega-col {
                     &:first-child ul.level1 > li.mega {
                         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05) !important;
-                    }
-
-                    &:nth-child(2) ul.level1 > li.mega {
-                        > ul.level2 {
-                            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05) !important
-                        }
                     }
                 }
             }
@@ -182,7 +171,7 @@
         &:hover,
         &.active {
             > a {
-                color: @green-main !important;
+                color: @text-color-secondary !important;
             }
         }
     }
@@ -198,7 +187,7 @@
             > a,
             > span {
                 background: none !important;
-                color: @green-main !important;
+                color: @text-color-secondary !important;
             }
         }
 
@@ -247,6 +236,7 @@
                         a.mega,
                         span.mega {
                             max-width: 285px;
+                            width: 100%;
                         }
 
                     }
@@ -348,7 +338,7 @@
 
     .parent-item {
         font-size: 16px;
-        color: @secondary__color__light;
+        color: @text-color-secondary--light;
         font-weight: 600;
         margin: 0;
         padding-top: 14px;
@@ -488,7 +478,7 @@
 @media screen and (max-width: @screen__m) {
     .off-canvas-menu-img {
         display: block;
-        height: 32px !important;
+        height: 48px !important;
         box-sizing: content-box;
 
         > a {

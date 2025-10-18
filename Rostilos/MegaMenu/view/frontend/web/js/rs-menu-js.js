@@ -473,23 +473,47 @@ class ubMenu {
         menuItems.forEach(function(item) {
             item.addEventListener(eventName, function(e) {
                 let preventDefault = false;
-                if (e.target.tagName === 'A' || e.target.parentElement.classList.contains('mega')) {
+                if (e.target.tagName === 'A' || e.target.closest('a.mega')) {
                     preventDefault = true;
                 }
-                // Inactivate all sibling elements
-                const siblings = Array.from(this.parentElement.parentElement.children);
-                siblings.forEach(function(sibling) {
-                    sibling.querySelector('.active')?.classList.remove('active');
+
+                // --- START FIX ---
+
+                // 1. Check if the item we're clicking was already active
+                const wasActive = this.classList.contains('active');
+
+                // 2. Get the parent <li> of the clicked <a>/<span>
+                const currentLi = this.parentElement;
+
+                // 3. Get all sibling <li> elements (including the current one)
+                const allListItems = Array.from(currentLi.parentElement.children);
+
+                // 4. Deactivate ALL accordions at this level
+                allListItems.forEach(function(li) {
+                    // Remove active from the <a> or <span> trigger
+
+                    li.querySelector("a.has-child, span.has-child")?.classList.remove('active');
+                    li.classList.remove('active');
+
+                    // Remove active from the child-content div
+                    li.querySelector("div.child-content")?.classList.remove('active');
                 });
-                // Toggle active class for the current element
-                if (!this.classList.contains('active')) {
+
+                // 5. If the clicked item was NOT active, open it.
+                if (!wasActive) {
+                    // Add 'active' back to the clicked trigger
                     this.classList.add('active');
-                    siblings.forEach(function(sibling) {
-                        sibling.querySelector('.has-child')?.classList.add('active');
-                    });
-                } else {
-                    this.classList.remove('active');
+
+                    // Add 'active' to its sibling child-content div
+                    const childContent = currentLi.querySelector("div.child-content");
+                    if (childContent) {
+                        currentLi.classList.add('active');
+                        childContent.classList.add('active');
+                    }
                 }
+
+                // --- END FIX ---
+
                 if (preventDefault) {
                     e.preventDefault();
                 }

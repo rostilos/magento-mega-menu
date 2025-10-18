@@ -13,12 +13,12 @@ use Magento\Framework\View\Element\Template;
      class="relative z-50 w-full"
      @keydown.window.escape="searchOpen = false;"
 >
-    <div class="container">
+    <div class="container rs-mega-menu">
         <!--Main Navigation-->
         <div class="relative sections nav-sections min-h-[50px] text-black
                     transition-all bg-geGreen-medium font-montserrat">
             <span class="absolute left-sub width-sub top-0 bg-geGreen-medium h-full"></span>
-            <div class="absolute top-0 left-0 py-4 px-5 off-canvas-menu-img">
+            <div class="off-canvas-menu-img rs-mega-menu__logo">
                 <?= $block->getChildHtml('logo-burger'); ?>
             </div>
             <div class="page-main section-item-content nav-sections-item-content relative"

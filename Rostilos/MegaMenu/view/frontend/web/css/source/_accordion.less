@@ -1,5 +1,5 @@
 ul.accordion-root {
-    opacity: 1;
+    opacity: 1 !important;
 
     .mega-col {
         width: 100% !important;
@@ -61,7 +61,36 @@ ul.accordion-root {
     }
 
     li.mega {
-        border-bottom: 1px solid @border-color__base;
+        a {
+            &.has-child {
+                position: relative !important;
+                &.active {
+                    &:after {
+                        content: '-';
+                    }
+                }
+                &:after{
+                    content: '+';
+                    position: absolute;
+                    pointer-events: none;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 16px;
+                    display: block;
+                    margin-right: -16px;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 1;
+                }
+            }
+        }
+
+        &.active {
+            .child-content {
+                border-left: 1px @border-color__base solid;
+            }
+        }
+
         width: 100%;
 
         &:empty {
@@ -71,7 +100,11 @@ ul.accordion-root {
         > .mega {
             position: relative;
             padding: 14px 0;
+            display: inline-block;
             line-height: 1;
+            .fa {
+                margin-right: 12px;
+            }
         }
 
         &.group {
@@ -385,6 +418,8 @@ ul.accordion-root {
 
                     &.active {
                         display: block !important;
+                        opacity: 1 !important;
+                        visibility: visible !important;
                     }
                 }
             }
