@@ -12,7 +12,6 @@ use Rostilos\MegaMenu\Model\Group;
 use Rostilos\MegaMenu\Model\Item;
 use Rostilos\MegaMenu\Model\Item\Image as ImageModel;
 use Rostilos\Base\Helper\Data as BaseHelper;
-use stdClass;
 
 
 class Mega extends AbstractHelper
